@@ -20,7 +20,8 @@ var colour_map = {
             primary: "rgb(119,119,119)",
             a: "rgb(119,119,119)",
             b: "rgb(119,119,119)",
-            minor: '#505050'
+            minor: '#505050',
+            other: '#505050'
         },
         fill: {
             motorway: "rgb(153,165,255)",
@@ -29,7 +30,8 @@ var colour_map = {
             secondary: '#FFFFFF',
             a: "rgb(255,179,193)",
             b: "rgb(230,210,115)",
-            minor: '#D3D3D3'
+            minor: 'rgb(255,255,255)',
+            other: 'rgb(255,255,255)'
         },
         label :{
         	motorway_junction : {
@@ -776,9 +778,9 @@ var layers_config = [
         "line-width": {
           "stops": [
                 [13,2],
-                [15,5],
-                [16,14],
-                [17,36]
+                [15,4],
+                [16,12],
+                [17,24]
             ]
         }
         
@@ -803,14 +805,68 @@ var layers_config = [
         "line-width": {
           "stops": [
                 [13,1.8],
-                [15,4.8],
-                [16,13.8],
-                [17,34.8]
+                [15,3.8],
+                [16,11.8],
+                [17,22.8]
             ]
         }
         
       }
-}
+},
+    {
+        /* OTHER ROAD CASING*/
+        "id": "openmap_other_road_casing",
+        "type": "line",
+        "source": "vector_layer_",
+        "source-layer": "openmap_road",
+        "filter" :[
+            "any",
+            ["!=","CLASSIFICA","Minor Road"]
+        ],
+        "layout": {
+            "line-cap": "round"
+        },
+        "minzoom" : 9,
+        "paint": {
+            "line-color": colour_map.road.casing.other,
+            "line-width": {
+                "stops": [
+                    [13,2],
+                    [15,4],
+                    [16,12],
+                    [17,24]
+                ]
+            }
+
+        }
+    },
+    {
+        /* OTHER ROAD FILL*/
+        "id": "openmap_other_road_fill",
+        "type": "line",
+        "source": "vector_layer_",
+        "source-layer": "openmap_road",
+        "filter" :[
+            "any",
+            ["!=","CLASSIFICA","Minor Road"]
+        ],
+        "layout": {
+            "line-cap": "round"
+        },
+        "minzoom" : 9,
+        "paint": {
+            "line-color": colour_map.road.fill.other,
+            "line-width": {
+                "stops": [
+                    [13,1.8],
+                    [15,3.8],
+                    [16,11.8],
+                    [17,22.8]
+                ]
+            }
+
+        }
+    }
 ];
 
 
