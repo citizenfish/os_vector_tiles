@@ -1,31 +1,583 @@
 {
   "config": {
-    "output_file": "/opt/nautoguide/gisraw/vector_tiles/os_opendate.mbtiles",
+    "output_file": "/opt/nautoguide/gisraw/vector_tiles/os_all.mbtiles",
     "tmp_dir": "/tmp/os_opendata/",
     "minzoom": 0,
-    "maxzoom": 20,
-    "detail_level" : 7
+    "maxzoom": 16,
+    "detail_level": 8
   },
   "layers": {
-    "roads": [
+    "strategi_coast": [
+      {
+        "name": "UK Coast",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/uk_coast_ng_derived.shp",
+        "maxzoom": 16,
+        "minzoom": 0,
+        "add": {
+          "name": "coast"
+        }
+      }
+    ],
+    "strategi_motorway": [
       {
         "name": "Strategi Motorway",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/motorway.shp",
-        "maxzoom": 13,
-        "minzoom": 8,
-        "attrs": ["code"],
-        "add": {
-          "name": "Motorway"
-        }
-      },
+        "maxzoom": 12,
+        "minzoom": 5,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "strategi_primary": [
       {
         "name": "Strategi Primary Road",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/primary_road.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
+        "minzoom": 5,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "strategi_a_road": [
+      {
+        "name": "Strategi A Road",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/a_road.shp",
+        "maxzoom": 12,
+        "minzoom": 5,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "strategi_b_road": [
+      {
+        "name": "Strategi B Road",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/b_road.shp",
+        "maxzoom": 12,
         "minzoom": 8,
-        "attrs": [],
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "strategi_minor_road": [
+      {
+        "name": "Minor Road",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/minor_road.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "strategi_railway_line": [
+      {
+        "name": "Railway Line",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/railway_line.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend"
+        ]
+      }
+    ],
+    "strategi_railway_point": [
+      {
+        "name": "Railway Point",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/railway_point.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,name,orient"
+        ]
+      }
+    ],
+    "strategi_river_line": [
+      {
+        "name": "River Line",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/rivers_line.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "strategi_urban_region": [
+      {
+        "name": "Urban Region",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/urban_region.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "strategi_woodland_region": [
+      {
+        "name": "Woodland Region",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/woodland_region.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "strategi_lakes_region": [
+      {
+        "name": "Woodland Region",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/lakes_region.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "strategi_foreshore_region": [
+      {
+        "name": "Foreshore Region",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/foreshor_region.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "strategi_general_text": [
+      {
+        "name": "General Text",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/general_text.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,name,orient,font_size,anchor_pt"
+        ]
+      }
+    ],
+    "strategi_admin_line": [
+      {
+        "name": "Admin Line",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/admin_line.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "legend"
+        ]
+      }
+    ],
+    "strategi_antiquity_line": [
+      {
+        "name": "Antiquity Line",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/antiquity_line.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,name"
+        ]
+      }
+    ],
+    "strategi_admin_seed": [
+      {
+        "name": "Admin Line",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/admin_seed.shp",
+        "maxzoom": 12,
+        "minzoom": 5,
+        "attrs": [
+          "code,legend,name,admin_name"
+        ]
+      }
+    ],
+    "strategi_settlement_seed": [
+      {
+        "name": "Settlement Seed",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/settlement_seed.shp",
+        "maxzoom": 12,
+        "minzoom": 5,
+        "attrs": [
+          "code,legend,name,admin_name,location"
+        ]
+      }
+    ],
+    "strategi_road_point": [
+      {
+        "name": "Road Point",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/road_point.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,name,road_no,north,south,east,west,clockwise,anticlockw"
+        ]
+      }
+    ],
+    "strategi_ferry_box": [
+      {
+        "name": "Ferry Box",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/ferry_box.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend"
+        ]
+      }
+    ],
+    "strategi_ferry_line": [
+      {
+        "name": "Ferry Line",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/ferry_line.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,ferry_from,ferry_to,ferry_time,ferry_type,restrictio,access"
+        ]
+      }
+    ],
+    "strategi_gridlines": [
+      {
+        "name": "Gridlines",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/gridlines.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend"
+        ]
+      }
+    ],
+    "strategi_landuse_seed": [
+      {
+        "name": "Land Use Seed",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/land_use_seed.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,name"
+        ]
+      }
+    ],
+    "strategi_landuse_symbol": [
+      {
+        "name": "Land Use Symbol",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/land_use_symbol.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,name"
+        ]
+      }
+    ],
+    "strategi_national_park": [
+      {
+        "name": "National Park",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/national_park.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,name"
+        ]
+      }
+    ],
+    "strategi_spot_height": [
+      {
+        "name": "Spot Height",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/spot_height.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,imperial,metric"
+        ]
+      }
+    ],
+    "strategi_tourist_symbol": [
+      {
+        "name": "Tourist Symbol",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/tourist_symbol.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,name,usage,owner,orient"
+        ]
+      }
+    ],
+    "strategi_transport_text": [
+      {
+        "name": "Transport Text",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/transport_text.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,name,orient,font_size,anchor_pt"
+        ]
+      }
+    ],
+    "openmap_road": [
+      {
+        "name": "Openmap Road",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/Road.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "classifica","roadnumber","featcode"
+        ],
         "add": {
-          "name": "Primary Road"
+          "name": "Openmap Road"
+        }
+      }
+    ],
+    "openmap_building": [
+      {
+        "name": "Openmap Building",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/Building.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ],
+        "add": {
+          "name": "Openmap Building"
+        }
+      }
+    ],
+    "openmap_electricityline": [
+      {
+        "name": "Openmap Electricity Transmission Line",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/ElectricityTransmissionLine.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ],
+        "add": {
+          "name": "Openmap Electricity Transmission Line"
+        }
+      }
+    ],
+    "openmap_foreshore": [
+      {
+        "name": "Openmap Foreshore",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/Foreshore.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ],
+        "add": {
+          "name": "Openmap Foreshore"
+        }
+      }
+    ],
+    "openmap_functionalsite": [
+      {
+        "name": "Openmap Functional Site",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/FunctionalSite.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "distname,sitetheme,classifica,featcode"
+        ],
+        "add": {
+          "name": "Openmap Functional Site"
+        }
+      }
+    ],
+    "openmap_glasshouse": [
+      {
+        "name": "Openmap Glasshouse",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/FunctionalSite.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ],
+        "add": {
+          "name": "Openmap Glasshouse"
+        }
+      }
+    ],
+    "openmap_importantbuilding": [
+      {
+        "name": "Openmap Important Building",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/ImportantBuilding.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode,buildgthem,classifica,distname"
+        ],
+        "add": {
+          "name": "Openmap Important Building"
+        }
+      }
+    ],
+    "openmap_motorwayjunction": [
+      {
+        "name": "Openmap Motorway Junction",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/MotorwayJunction.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "junctnum,featcode"
+        ],
+        "add": {
+          "name": "Openmap Motorway Junction"
+        }
+      }
+    ],
+    "openmap_namedplace": [
+      {
+        "name": "Openmap Named Place",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/NamedPlace.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "distname,htmlname,classifica,fontheight,orientatio,featcode"
+        ],
+        "add": {
+          "name": "Openmap Named Place"
+        }
+      }
+    ],
+    "openmap_railwaystation": [
+      {
+        "name": "Openmap Railway Station",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/RailwayStation.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "distname,classifica,featcode"
+        ],
+        "add": {
+          "name": "Openmap Railway Station"
+        }
+      }
+    ],
+    "openmap_railwaytrack": [
+      {
+        "name": "Openmap Railway Track",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/RailwayTrack.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "classifica,featcode"
+        ],
+        "add": {
+          "name": "Openmap Railway Track"
+        }
+      }
+    ],
+    "openmap_railwaytunnel": [
+      {
+        "name": "Openmap Railway Tunnel",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/RailwayTunnel.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ],
+        "add": {
+          "name": "Openmap Railway Tunnel"
+        }
+      }
+    ],
+    "openmap_roadtunnel": [
+      {
+        "name": "Openmap Road Tunnel",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/RoadTunnel.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ],
+        "add": {
+          "name": "Openmap Road Tunnel"
+        }
+      }
+    ],
+    "openmap_roundabout": [
+      {
+        "name": "Openmap Roundabout",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/Roundabout.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode,classifica"
+        ],
+        "add": {
+          "name": "Openmap Roundabout"
+        }
+      }
+    ],
+    "openmap_surfacewaterarea": [
+      {
+        "name": "Openmap Surface Water Area",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/SurfaceWater_Area.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ],
+        "add": {
+          "name": "Openmap Surface Water Area"
+        }
+      }
+    ],
+    "openmap_surfacewaterline": [
+      {
+        "name": "Openmap Surface Water Line",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/SurfaceWater_Line.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ],
+        "add": {
+          "name": "Openmap Surface Water Line"
+        }
+      }
+    ],
+    "openmap_tidalboundary": [
+      {
+        "name": "Openmap Tidal Boundary",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/TidalBoundary.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode,classifica"
+        ],
+        "add": {
+          "name": "Openmap Tidal Boundary"
+        }
+      }
+    ],
+    "openmap_tidalwater": [
+      {
+        "name": "Openmap Tidal Water",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/TidalWater.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ],
+        "add": {
+          "name": "Openmap Tidal Water"
+        }
+      }
+    ],
+    "openmap_woodland": [
+      {
+        "name": "Openmap Woodland",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/openmap_vector/data/Woodland.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ],
+        "add": {
+          "name": "Openmap Woodland"
         }
       }
     ]
