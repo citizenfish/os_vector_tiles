@@ -813,16 +813,19 @@ var layers_config = [
 }
 ];
 
+
+///NOTE WELL fonts built locally via https://github.com/openmaptiles/fonts
+
 var os_style = {
     version: 8,
     sources: {
         'vector_layer_': {
             type: 'vector',
-            url: 'http://yaxi:8080/data/os.json'
+            url: 'http://localhost:8080/data/os.json'
         }
     },
     layers: layers_config,
     "sprite": "https://openmaptiles.github.io/osm-bright-gl-style/sprite",
-    "glyphs": "https://free.tilehosting.com/fonts/{fontstack}/{range}.pbf?key={key}"
+    "glyphs": "fonts/{fontstack}/{range}.pbf"
 };
 
