@@ -1,0 +1,33 @@
+{
+  "config": {
+    "output_file": "/opt/nautoguide/gisraw/vector_tiles/os_opendate.mbtiles",
+    "tmp_dir": "/tmp/os_opendata/",
+    "minzoom": 0,
+    "maxzoom": 20,
+    "detail_level" : 7
+  },
+  "layers": {
+    "roads": [
+      {
+        "name": "Strategi Motorway",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/motorway.shp",
+        "maxzoom": 13,
+        "minzoom": 8,
+        "attrs": ["code"],
+        "add": {
+          "name": "Motorway"
+        }
+      },
+      {
+        "name": "Strategi Primary Road",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/primary_road.shp",
+        "maxzoom": 13,
+        "minzoom": 8,
+        "attrs": [],
+        "add": {
+          "name": "Primary Road"
+        }
+      }
+    ]
+  }
+}
