@@ -101,9 +101,9 @@ sub make_geojson {
 
     #TRY USING SED FOR SPEED
 
-    my $jqcommand = 'sed \'s#"properties"#"tippecanoe" :{"minzoom" : '. $layer->{'minzoom'} .',"maxzoom" : '. $layer->{'maxzoom'} . '},"properties"#g\' '. $filename . '.tmp > ' . $filename;
-    print "JQ $jqcommand\n";
-    $result = `$jqcommand`;
+    my $sedcommand = 'sed \'s#"properties"#"tippecanoe" :{"minzoom" : '. $layer->{'minzoom'} .',"maxzoom" : '. $layer->{'maxzoom'} . '},"properties"#g\' '. $filename . '.tmp > ' . $filename;
+    print "SED $sedcommand\n";
+    $result = `$sedcommand`;
     print "$layer_name". ($result eq '' ? " JQ complete\n" : " JQ failed $result\n");
     return '-L ' . $tippecanoe_layer . ':' . $filename;
 
