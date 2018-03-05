@@ -21,7 +21,7 @@ my $layers = decode_json( $json_text );
 my @tippecanoe;
 
 # We need a tmp directory to mess about in
-if(! -e $layers->{'config'}->{'tmp_dir'} ){
+if(! -d $layers->{'config'}->{'tmp_dir'} ){
     make_path($layers->{'config'}->{'tmp_dir'});
 } else {
     print "CLEANING TMP DIR\n";
