@@ -2,6 +2,11 @@
 
 This repository contains the presentation materials, samples and code for talk given by Dave Barter at the [FOSS4G 2018](http://uk.osgeo.org/foss4guk2018/) Open Source conference.
 
+All of the content within is curated by [Nautoguide Ltd.](https://nautoguide.com) who are really nice and you should talk to them about developing some lovely map web sites.
+
+It's all licensed under the [https://www.gnu.org/licenses/gpl-3.0.en.html](GNU General Public License (GPL)) APART from the content of the fonts directory which are derived from https://github.com/mapbox/fontnik and licensed under the  OFL or Apache licenses.
+
+
 ## Creating Tiles
 
 [create_tiles](create_tiles) contains the **make_vector_tiles.pl** script which provides a wrapper around the workflow necessary to create MVT format vector tiles from multiple shape files. This requires a config file **config.json**
