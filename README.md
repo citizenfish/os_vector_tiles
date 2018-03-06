@@ -52,4 +52,4 @@ The **add** structure allows you to add fixed data to the layer attributes
 
 ## OS Opendata Mapbox Style
 
-This is very much work in progress but the latest style can be found in the [mapbox_samples](mapbox_samples) directory in the file **os_opendata_style.js**
+This is very much work in progress but the latest style can be found in the [mapbox-samples](mapbox-samples) directory in the file **os_opendata_style.js**
