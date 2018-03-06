@@ -92,7 +92,7 @@ sub make_geojson {
 
     }
 
-    #attributes we want
+    #we pull the attributes we want in GeoJSON using an SQLite query
     $command .=' -dialect SQLite -sql ' . (
                                            exists($layer->{'attrs'}->[0])   ?  '"SELECT '. join(',', @{$layer->{'attrs'}}) . ',geometry' .
                                                                                                $additional_attributes .
