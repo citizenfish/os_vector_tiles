@@ -76,7 +76,7 @@ sub make_geojson {
 
     return '-L ' . $tippecanoe_layer . ':' . $filename if($skip_geo eq 'y');
 
-    #Get layer name for attribite selection
+    #Get layer name from the shapefile for use in the attribute selection SQL.
     my $get_layer_name = 'ogrinfo -al -so ' . $layer->{'file'} . ' | grep \'Layer name\'';
     my $layer_name = `$get_layer_name`;
     $layer_name =~ s/Layer name:|\R| //g;
@@ -84,7 +84,12 @@ sub make_geojson {
     print "LAYER $layer_name\n";
 
     #attributes we want
-    $command .=' -dialect SQLite -sql ' . (exists($layer->{'attrs'}->[0]) ? '"SELECT '. join(',', @{$layer->{'attrs'}}) . ',geometry FROM ' . $layer_name.'" ' : '"SELECT geometry FROM ' . $layer_name.'" ');
+    $command .=' -dialect SQLite -sql ' . (
+                                           exists($layer->{'attrs'}->[0])   ?  '"SELECT '. join(',', @{$layer->{'attrs'}}) . ',geometry' .
+                                                                                               (exists($layer->{'add'} ? ',\''.$layer->{'add'}->{'name'}) . '\' as name ' : '') .
+                                                                                               'FROM ' . $layer_name.'" '
+                                                                            :  '"SELECT geometry FROM ' . $layer_name.'" '
+                                          );
 
     #final command construction
     $command .= $filename . '.tmp ' . $layer->{'file'};
@@ -95,16 +100,14 @@ sub make_geojson {
     my $result = `$command`;
     print "$layer_name". ($result eq '' ? " OGR complete\n" : " OGR failed $result\n");
 
-    #Now add in zoom details
-
+    #I tried using jq but it is far too slow on large files
     #my $jqcommand = 'jq \'.features[].tippecanoe.minzoom = ' . $layer->{'minzoom'} . '| .features[].tippecanoe.maxzoom = ' . $layer->{'maxzoom'} .'\' ' . $filename . '.tmp > ' . $filename;
-
-    #TRY USING SED FOR SPEED
+    #TUSING SED FOR SPEED
 
     my $sedcommand = 'sed \'s#"properties"#"tippecanoe" :{"minzoom" : '. $layer->{'minzoom'} .',"maxzoom" : '. $layer->{'maxzoom'} . '},"properties"#g\' '. $filename . '.tmp > ' . $filename;
     print "SED $sedcommand\n";
     $result = `$sedcommand`;
-    print "$layer_name". ($result eq '' ? " JQ complete\n" : " JQ failed $result\n");
+    print "$layer_name". ($result eq '' ? " SED complete\n" : " SED failed $result\n");
     return '-L ' . $tippecanoe_layer . ':' . $filename;
 
 }
