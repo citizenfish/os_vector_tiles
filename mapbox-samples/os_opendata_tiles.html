@@ -19,13 +19,16 @@
     <h2>OS Vector Tiles</h2>
   </header>
   <div id="map" class="map"></div>
-  <div id="layerList"></div>
+  <div id="layerList">
+    <button>OS Style</button>
+    <button>Wacky Style</button>
+  </div>
   <pre id="propertyList"></pre>
   <script>
   var map = new mapboxgl.Map({
     container: 'map',
     hash: true,
-    center : [-1.780258,51.554368],
+    center : [-1.780258,54.554368],
     zoom : 5,
     style: os_road_style
   });
