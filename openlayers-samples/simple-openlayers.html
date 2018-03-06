@@ -1,0 +1,76 @@
+<html>
+<head>
+    <title>Openlayers Vector Tiles</title>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sunburst"></script>
+    <script src="https://openlayers.org/en/v4.6.4/build/ol.js"></script>
+    <script src="https://openlayers.org/en/v4.6.4/examples/resources/mapbox-streets-v6-style.js"></script>
+    <style>
+        body { margin:0; padding:0; }
+        #map { height: 100%; width 100%}
+        #code{  position:absolute; top:10%; left:50%; width:45%;}}
+    </style>
+</head>
+<body>
+<div id="map" class="map"></div>
+<div id = "code">
+        <pre class="prettyprint lang-javascript">
+ /*OPENLAYERS EXAMPLE */
+ &lt;script src="https://..../ol.js"&gt;&lt;/script&gt;
+
+    /*** A layer style function **/
+    var waterStyle = new ol.style.Style({
+        fill: new ol.style.Fill({
+          color: '#9db9e8'
+        })
+      });
+
+    /*** Added to map style function **/
+    var map_style = function(feature,resolution) {
+
+            switch (feature.get('layer')) {
+
+                case: 'land' : return landStyle;
+                default: return null;
+            }
+
+    };
+
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.VectorTile({
+                declutter: true,
+                source: new ol.source.VectorTile({
+                    format: new ol.format.MVT(),
+                    url: 'https://URL/{z}/{x}/{y}.pbf.pict'
+                }),
+                style: map_style
+            })
+        ],
+        target: 'map',
+        view: new ol.View({
+            center: [0, 0],
+            zoom: 2
+        })
+    });
+        </pre>
+<script>
+
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.VectorTile({
+                source: new ol.source.VectorTile({
+                    format: new ol.format.MVT(),
+                    url: 'https://free.tilehosting.com/data/v3/{z}/{x}/{y}.pbf.pict?key=RiS4gsgZPZqeeMlIyxFo'
+                }),
+                style: createMapboxStreetsV6Style(ol.style.Style, ol.style.Fill, ol.style.Stroke, ol.style.Icon, ol.style.Text)
+            })
+        ],
+        target: 'map',
+        view: new ol.View({
+            center: [0, 0],
+            zoom: 2
+        })
+    });
+</script>
+</body>
+</html>

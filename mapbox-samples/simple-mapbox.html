@@ -1,0 +1,49 @@
+<html>
+<head>
+    <script src="http://localhost:8080/mapbox-gl.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sunburst"></script>
+    <style>
+        body { margin:0; padding:0; }
+        #map { height: 100%; width 100%}
+        #code{  position:absolute; top:40%; left:50%; width:45%;}}
+    </style>
+</head>
+    <div id = "map"></div>
+    <div id = "code">
+        <pre class="prettyprint lang-javascript">
+ /* MAPBOX EXAMPLE */
+ &lt;script src="http:.../mapbox-gl.js"&gt;&lt;/script&gt;
+
+ var map_style = {
+                sources: {
+                    vector_source: {
+                        type: 'vector',
+                        url: 'https://URL'
+                    }
+                },
+                sprite: '--my sprites location--',
+                glyphs: '--my glyphs location-- ',
+                layers: [ .. ]
+            };
+
+ var map = new mapboxgl.Map({
+                container: 'map',
+                style: map_style,
+                center: [-3.6, 54.5],
+                zoom: 5
+            });
+
+        </pre>
+    </div>
+        <script>
+
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'https://openmaptiles.github.io/osm-bright-gl-style/style-cdn.json',
+                center: [-3.6, 54.5],
+                zoom: 5
+            });
+
+
+        </script>
+</html>

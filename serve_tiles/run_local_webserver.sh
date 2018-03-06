@@ -1,0 +1,2 @@
+cd ..
+http-server
