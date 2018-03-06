@@ -184,6 +184,12 @@ h1 {
     padding: 0 10px;
 
 }
-.buttony.wacky {
+.buttony.wacky em {
     font-family: "Comic Sans MS", cursive;
+    color: #d432be;
+    animation: blinker 1s linear infinite;
+    font-style: normal;
+}
+@keyframes blinker {
+    50% { opacity: 0; }
 }
