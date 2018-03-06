@@ -191,5 +191,5 @@ h1 {
     font-style: normal;
 }
 @keyframes blinker {
-    50% { opacity: 0; }
+    50% { opacity: 0; } 
 }
