@@ -4,7 +4,7 @@ This repository contains the presentation materials, samples and code for talk g
 
 All of the content within is curated by [Nautoguide Ltd.](https://nautoguide.com) who are really nice and you should talk to them about developing some lovely map web sites.
 
-It's all licensed under the [https://www.gnu.org/licenses/gpl-3.0.en.html](GNU General Public License) APART from the content of the fonts directory which are derived from https://github.com/mapbox/fontnik and licensed under the  OFL or Apache licenses.
+It's all licensed under the [GPL](https://www.gnu.org/licenses/gpl-3.0.en.html) APART from the content of the fonts directory which are derived from https://github.com/mapbox/fontnik and licensed under the  OFL or Apache licenses.
 
 
 ## Creating Tiles
