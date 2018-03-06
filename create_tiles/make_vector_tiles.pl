@@ -83,11 +83,20 @@ sub make_geojson {
 
     print "LAYER $layer_name\n";
 
+    #New attributes can be added if so desired
+    my $additional_attributes = '';
+
+    foreach my $key (keys %{$layer->{'add'}}) {
+
+        $additional_attributes .= ',\'''. $layer{'add'}->{$key} \' as ' . $key;
+
+    }
+
     #attributes we want
     $command .=' -dialect SQLite -sql ' . (
                                            exists($layer->{'attrs'}->[0])   ?  '"SELECT '. join(',', @{$layer->{'attrs'}}) . ',geometry' .
-                                                                                               (exists($layer->{'add'} ? ',\''.$layer->{'add'}->{'name'}) . '\' as name ' : '') .
-                                                                                               'FROM ' . $layer_name.'" '
+                                                                                               $additional_attributes .
+                                                                                               ' FROM ' . $layer_name.'" '
                                                                             :  '"SELECT geometry FROM ' . $layer_name.'" '
                                           );
 
