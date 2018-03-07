@@ -12,6 +12,7 @@
   <script src="os_opendata_style.js"></script>
   <script src="os_roads_style.js"></script>
   <script src="os_buildings_style.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
@@ -21,8 +22,9 @@
   </header>
   <div id="map" class="map"></div>
   <div id="layerList" class="layerList">
-    <button class="buttony">OS Style</button>
-    <button class="buttony wacky"><em>Wacky</em> Style</button>
+    <button id="os_style" class="buttony">OS Style</button>
+    <button id="os_roads_style" class="buttony wacky"><em>Wacky</em> Style</button>
+    <button id="os_buildings_style" class="buttony"><em>Buildings</em> Style</button>
   </div>
   <pre id="propertyList"></pre>
   <script>
@@ -31,15 +33,14 @@
     hash: true,
     center : [-1.780258,54.554368],
     zoom : 5,
-    style: os_road_style
+    style: os_style
   });
   map.addControl(new mapboxgl.NavigationControl());
-  
-  var inspect = new MapboxInspect({
-    showInspectMap: true,
-    showInspectButton: false
-  });
 
+
+  $('#os_style').on('click',           function(){ map.setZoom(9);  map.setStyle(os_style)});
+  $('#os_roads_style').on('click',     function(){ map.setZoom(8);  map.setStyle(os_road_style)});
+  $('#os_buildings_style').on('click', function(){ map.setZoom(10); map.setStyle(os_buildings_style)});
   </script>
 </body>
 </html>
