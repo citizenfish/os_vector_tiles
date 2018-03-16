@@ -8,7 +8,10 @@ use File::Basename;
 use File::Path qw(make_path);
 my $config = "./config.json";
 my $skip_geo ='n';
-GetOptions('config=s' => \$config, 'skip_geo=s' => \$skip_geo);
+my $tile_format = 'mbtiles';
+my $debug = 'false';
+
+GetOptions('config=s' => \$config, 'skip_geo=s' => \$skip_geo, 'tile_format=s' => \$tile_format, 'debug=s' => \$debug);
 
 
 my $json = JSON->new->utf8;
@@ -32,10 +35,10 @@ if(! -d $layers->{'config'}->{'tmp_dir'} ){
 
 foreach my $keys (keys %{$layers->{'layers'}}) {
 
-    print "KEY $keys\n";
+    print "LAYER $keys\n";
     #$keys contains hashname and points to an array of layers
     foreach my $layer (@{$layers->{'layers'}->{$keys}}) {
-        print "Constructing from source " . $layer->{'name'} . "\n";
+        print "Constructing from source " . $layer->{'name'} . "\n" if $debug eq 'true';
         push (@tippecanoe, make_geojson($layer, $layers->{'config'}->{'tmp_dir'}, $keys, $skip_geo));
 
     }
@@ -50,7 +53,16 @@ foreach my $geojson (@tippecanoe) {
     $tippecanoe_command .= ' ' . $geojson;
 }
 
-$tippecanoe_command .= ' -f -o ' . $layers->{'config'}->{'output_file'};
+#Forgive me father for I have sinned ... quick hacky way to change format type
+if($tile_format eq 'mbtiles') {
+    print "WRITING TILES TO MBTILES FILE: " .  $layers->{'config'}->{'output_file'};
+    $tippecanoe_command .= ' -f -o ' . $layers->{'config'}->{'output_file'};
+} else {
+    print "WRITING TILES TO DIRECTORY " . $layers->{'config'}->{'output_directory'};
+    $tippecanoe_command .= ' -pC -f -e ' . $layers->{'config'}->{'output_directory'};
+}
+
+
 
 print "$tippecanoe_command\n";
 my $tipp = `$tippecanoe_command`;
@@ -88,7 +100,7 @@ sub make_geojson {
 
     foreach my $key (keys %{$layer->{'add'}}) {
 
-        $additional_attributes .= ',\'''. $layer{'add'}->{$key} \' as ' . $key;
+        $additional_attributes .= ',\''. $layer{'add'}->{$key} . '\' as ' . $key;
 
     }
 
@@ -105,7 +117,7 @@ sub make_geojson {
 
     #Remove existing tmp file
     #unlink($filename . '.tmp');
-    print "OGR COMMAND $command\n";
+    print "OGR COMMAND $command\n" if $debug eq 'true';
     my $result = `$command`;
     print "$layer_name". ($result eq '' ? " OGR complete\n" : " OGR failed $result\n");
 
@@ -114,7 +126,7 @@ sub make_geojson {
     #TUSING SED FOR SPEED
 
     my $sedcommand = 'sed \'s#"properties"#"tippecanoe" :{"minzoom" : '. $layer->{'minzoom'} .',"maxzoom" : '. $layer->{'maxzoom'} . '},"properties"#g\' '. $filename . '.tmp > ' . $filename;
-    print "SED $sedcommand\n";
+    print "SED $sedcommand\n" if $debug eq 'true';
     $result = `$sedcommand`;
     print "$layer_name". ($result eq '' ? " SED complete\n" : " SED failed $result\n");
     return '-L ' . $tippecanoe_layer . ':' . $filename;
