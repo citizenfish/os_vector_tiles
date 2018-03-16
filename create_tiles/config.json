@@ -45,7 +45,7 @@
         "name": "Strategi A Road",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/a_road.shp",
         "maxzoom": 12,
-        "minzoom": 5,
+        "minzoom": 8,
         "attrs": [
           "code"
         ]

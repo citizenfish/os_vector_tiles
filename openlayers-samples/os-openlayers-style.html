@@ -1,0 +1,104 @@
+<html>
+<head>
+    <title>Openlayers Vector Tiles - OS Style</title>
+    <script src="https://lib.nautoguide.com/moho/master/js/libs/openlayers/ol-debug.js"></script>
+    <style>
+        body { margin:0; padding:0; }
+        #map { height: 100%; width 100%;}
+        #code{  position:absolute; top:10%; left:50%; width:45%;}
+    </style>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<header>
+    <img src="../css/logo.svg" class="logo">
+    <h2>Openlayers vector tiles OS Style</h2>
+</header>
+<div id="map"></div>
+<script>
+
+    var colour_map = {
+        land : {
+            outline : {
+
+            },
+            fill : {
+                water : "rgb(158,189,255)",
+                land  : "rgb(255,255,255)",
+                urban_region : "hsla(0, 3%, 85%, 0.84)",
+                woodland_region :  "rgb(214,243,206)",
+                lakes_region : "rgb(217,234,238)",
+                foreshore_sand_region : "rgb(255,255,204)",
+                foreshore_other_region : "rgb(239,231,189)",
+                river_line : "rgb(182,215,223)"
+            }
+        },
+        road: {
+            casing: {
+                motorway: "rgb(102,102,102)",
+                primary: "rgb(119,119,119)",
+                a: "rgb(119,119,119)",
+                b: "rgb(119,119,119)",
+                minor: '#505050',
+                other: '#505050'
+            },
+            fill: {
+                motorway: "rgb(153,165,255)",
+                motorway_centre: "rgb(255,255,255)",
+                primary: "rgb(136,194,152)",
+                secondary: '#FFFFFF',
+                a: "rgb(255,179,193)",
+                b: "rgb(230,210,115)",
+                minor: 'rgb(255,255,255)',
+                other: 'rgb(255,255,255)'
+            },
+            label :{
+                motorway_junction : {
+                    colour: "#36B1D2"
+                }
+            }
+        },
+        rail :{
+            fill : {
+                line : "#BBB"
+            }
+        }
+    };
+
+    var style = function(feature,resolution) {
+
+        var properties = feature.getProperties();
+
+        if (properties.layer == 'strategi_coast') {
+
+            console.log(properties);
+            return new ol.style.Style({
+                fill : new ol.style.Fill({
+                    color : colour_map.land.fill.land
+                })
+
+
+            });
+        }
+
+    };
+
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.VectorTile({
+                source: new ol.source.VectorTile({
+                    format: new ol.format.MVT(),
+                    url: 'https://images.tilecache.net/maptiles/vtdev/strategi/{z}/{x}/{y}.pbf'
+                }),
+                style: style
+            })
+        ],
+        target: 'map',
+        view: new ol.View({
+            center: [-150000,7345629],
+            zoom: 4
+        })
+    });
+</script>
+</body>
+</html>
