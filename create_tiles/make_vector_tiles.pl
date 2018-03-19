@@ -6,6 +6,8 @@ use File::Slurp;
 use Data::Dumper;
 use File::Basename;
 use File::Path qw(make_path);
+use File::Find::Rule;
+
 my $config = "./config.json";
 my $skip_geo ='n';
 my $tile_format = 'mbtiles';
@@ -31,6 +33,17 @@ if(! -d $layers->{'config'}->{'tmp_dir'} ){
     system('rm -rf '. $layers->{'config'}->{'tmp_dir'}.'*');
 }
 
+#Make any new shapefiles if required
+
+if(defined($layers->{'config'}->{'uk_shapefiles'})) {
+
+    make_uk_shapefiles($layers->{'config'}->{'uk_shapefiles'}, $layers->{'config'}->{'tmp_dir'});
+    exit;
+}
+
+
+
+exit;
 #First make our temp GeoJSON files
 
 foreach my $keys (keys %{$layers->{'layers'}}) {
@@ -66,6 +79,32 @@ if($tile_format eq 'mbtiles') {
 
 print "$tippecanoe_command\n";
 my $tipp = `$tippecanoe_command`;
+
+
+sub make_uk_shapefiles {
+
+    my $shapefiles = shift;
+    my $tmp_dir = shift;
+
+    foreach my $shapefile (@{$shapefiles}) {
+
+        my $out_file =  $tmp_dir . $shapefile->{'name'} . '.shp';
+        print "Making shapefile $shapefile->{'name'} into $out_file\n";
+        system('rm ' . $out_file) if (-e $out_file);
+        my $rule = File::Find::Rule->new;
+        $rule->file;
+        #$rule->name($shapefile->{'find'});
+        my @files = $rule->file()->name($shapefile->{'find'})->in($shapefile->{'path'});
+
+        print "DEBUG\n";
+        print Dumper(@files);
+
+    }
+}
+
+
+
+
 
 sub make_geojson {
     my $layer = shift;

@@ -4,16 +4,26 @@
     "output_directory": "/opt/nautoguide/scripts/map_tile_creation/vttiles",
     "tmp_dir": "/tmp/os_opendata/",
     "minzoom": 0,
-    "maxzoom": 6,
-    "detail_level": 8
+    "maxzoom": 12,
+    "detail_level": 6
   },
   "layers": {
     "strategi_coast": [
       {
+        "name": "World Coast",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/land_shapes/world_with_os_mercator.shp",
+        "s_srs": "EPSG:3857",
+        "maxzoom": 6,
+        "minzoom": 0,
+        "add": {
+          "name": "coast"
+        }
+      },
+      {
         "name": "UK Coast",
-        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/uk_coast_ng_derived.shp",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/land_shapes/uk_coast.shp",
         "maxzoom": 16,
-        "minzoom": 6,
+        "minzoom": 7,
         "add": {
           "name": "coast"
         }
@@ -68,7 +78,7 @@
         "name": "Minor Road",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/minor_road.shp",
         "maxzoom": 12,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code"
         ]
@@ -79,7 +89,7 @@
         "name": "Railway Line",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/railway_line.shp",
         "maxzoom": 12,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code,legend"
         ]
@@ -90,7 +100,7 @@
         "name": "Railway Point",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/railway_point.shp",
         "maxzoom": 12,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code,legend,name,orient"
         ]
@@ -116,15 +126,6 @@
         "attrs": [
           "code"
         ]
-      },
-      {
-        "name": "VD Building",
-        "file": "/opt/nautoguide/gisraw/os-opendata-2016/vector_district/vector/Building.shp",
-        "maxzoom": 13,
-        "minzoom": 11,
-        "attrs": [
-          "featcode"
-        ]
       }
     ],
     "strategi_woodland_region": [
@@ -140,7 +141,7 @@
     ],
     "strategi_lakes_region": [
       {
-        "name": "Woodland Region",
+        "name": "Lakes Region",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/lakes_region.shp",
         "maxzoom": 12,
         "minzoom": 8,
@@ -165,7 +166,7 @@
         "name": "General Text",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/general_text.shp",
         "maxzoom": 12,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code,legend,name,orient,font_size,anchor_pt"
         ]
@@ -209,7 +210,7 @@
         "name": "Settlement Seed",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/settlement_seed.shp",
         "maxzoom": 12,
-        "minzoom": 7,
+        "minzoom": 9,
         "attrs": [
           "code,legend,name,admin_name,location"
         ]
@@ -231,7 +232,7 @@
         "name": "Ferry Box",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/ferry_box.shp",
         "maxzoom": 12,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code,legend"
         ]
@@ -253,7 +254,7 @@
         "name": "Gridlines",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/gridlines.shp",
         "maxzoom": 12,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code,legend"
         ]
@@ -264,7 +265,7 @@
         "name": "Land Use Seed",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/land_use_seed.shp",
         "maxzoom": 12,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code,legend,name"
         ]
@@ -275,7 +276,7 @@
         "name": "Land Use Symbol",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/land_use_symbol.shp",
         "maxzoom": 12,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code,legend,name"
         ]
@@ -297,7 +298,7 @@
         "name": "Spot Height",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/spot_height.shp",
         "maxzoom": 12,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code,legend,imperial,metric"
         ]
@@ -308,7 +309,7 @@
         "name": "Tourist Symbol",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/tourist_symbol.shp",
         "maxzoom": 12,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code,legend,name,usage,owner,orient"
         ]
@@ -319,7 +320,7 @@
         "name": "Transport Text",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/transport_text.shp",
         "maxzoom": 12,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code,legend,name,orient,font_size,anchor_pt"
         ]
