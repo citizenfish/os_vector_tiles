@@ -123,6 +123,149 @@
           "code"
         ]
       }
+    ],
+    "uk_woodland_region": [
+      {
+        "name": "Woodland Region",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/woodland_region.shp",
+        "maxzoom": 13,
+        "minzoom": 8,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "uk_lakes_region": [
+      {
+        "name": "Lakes Region",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/lakes_region.shp",
+        "maxzoom": 13,
+        "minzoom": 8,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "uk_foreshore_region": [
+      {
+        "name": "Foreshore Region",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/foreshor_region.shp",
+        "maxzoom": 13,
+        "minzoom": 8,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "uk_general_text": [
+      {
+        "name": "General Text",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/general_text.shp",
+        "maxzoom": 13,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,name,orient,font_size,anchor_pt"
+        ]
+      }
+    ],
+    "uk_railway_line": [
+      {
+        "name": "Railway Line",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/railway_line.shp",
+        "maxzoom": 13,
+        "minzoom": 9,
+        "attrs": [
+          "code,legend"
+        ]
+      }
+    ],
+    "uk_railway_point": [
+      {
+        "name": "Railway Point",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/railway_point.shp",
+        "maxzoom": 13,
+        "minzoom": 9,
+        "attrs": [
+          "code,legend,name,orient"
+        ]
+      }
+    ],
+    "uk_river_line": [
+      {
+        "name": "River Line",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/rivers_line.shp",
+        "maxzoom": 13,
+        "minzoom": 8,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "uk_admin_seed": [
+      {
+        "name": "Admin Line",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/admin_seed.shp",
+        "maxzoom": 13,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,name,admin_name"
+        ]
+      }
+    ],
+    "uk_settlement_seed": [
+      {
+        "name": "Settlement Seed",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/settlement_seed.shp",
+        "maxzoom": 13,
+        "minzoom": 9,
+        "attrs": [
+          "code,legend,name,admin_name,location"
+        ]
+      }
+    ],
+    "uk_road_point": [
+      {
+        "name": "Road Point",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/road_point.shp",
+        "maxzoom": 13,
+        "minzoom": 8,
+        "attrs": [
+          "code,legend,name,road_no,north,south,east,west,clockwise,anticlockw"
+        ]
+      }
+    ],
+    "uk_landuse_seed": [
+      {
+        "name": "Land Use Seed",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/land_use_seed.shp",
+        "maxzoom": 13,
+        "minzoom": 9,
+        "attrs": [
+          "code,legend,name"
+        ]
+      }
+    ],
+    "uk_landuse_symbol": [
+      {
+        "name": "Land Use Symbol",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/land_use_symbol.shp",
+        "maxzoom": 13,
+        "minzoom": 9,
+        "attrs": [
+          "code,legend,name"
+        ]
+      }
+    ],
+    "uk_transport_text": [
+      {
+        "name": "Transport Text",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/transport_text.shp",
+        "maxzoom": 13,
+        "minzoom": 9,
+        "attrs": [
+          "code,legend,name,orient,font_size,anchor_pt"
+        ]
+      }
     ]
   }
 }
