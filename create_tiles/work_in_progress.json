@@ -1,0 +1,80 @@
+{
+  "config": {
+    "output_file": "FAIL",
+    "output_directory": "/opt/nautoguide/fast_mount/vector_tiles/output",
+    "tmp_dir": "/opt/nautoguide/fast_mount/vector_tiles/tmp/",
+    "minzoom": 0,
+    "maxzoom": 12,
+    "detail_level": 6,
+    "merge_shapefiles": [
+      {
+         "name": "uk_openroads",
+         "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data",
+         "regex": "[A-Z]{2}_RoadLink\\.shp",
+         "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
+         "overwrite" : "n"
+      }
+    ]
+  },
+  "layers": {
+    "world_coast": [
+      {
+        "name": "World Coast",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/land_shapes/data/world_with_os_mercator.shp",
+        "s_srs": "EPSG:3857",
+        "maxzoom": 6,
+        "minzoom": 0,
+        "add": {
+          "name": "coast"
+        },
+        "skip" : "n"
+      },
+      {
+        "name": "UK Coast",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/land_shapes/data/uk_coast.shp",
+        "maxzoom": 16,
+        "minzoom": 7,
+        "add": {
+          "name": "coast"
+        },
+        "skip" : "n"
+      }
+    ],
+    "uk_motorway_overview": [
+      {
+        "name": "UK Motorway Overview",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
+        "maxzoom": 12,
+        "minzoom": 6,
+        "selector" : "class = 'Motorway' AND formofway != 'Slip Road'",
+        "attrs": [
+          "roadnumber", "class", "formOfWay"
+        ]
+      }
+    ],
+    "uk_primary_overview": [
+      {
+        "name": "UK Primary Overview",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "selector" : "class = 'A Road' AND formofway != 'Slip Road'",
+        "attrs": [
+          "roadnumber", "class", "formOfWay"
+        ]
+      }
+    ],
+    "uk_secondary_overview": [
+      {
+        "name": "UK Secondary Overview",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
+        "maxzoom": 12,
+        "minzoom": 10,
+        "selector" : "(class = 'B Road' OR class = 'Classified Unnumbered') AND formofway != 'Slip Road'",
+        "attrs": [
+          "roadnumber", "class", "formOfWay"
+        ]
+      }
+    ]
+  }
+}

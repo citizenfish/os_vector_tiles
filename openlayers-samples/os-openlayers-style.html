@@ -17,6 +17,11 @@
 <div id="map"></div>
 <script>
 
+    var pixel_metres = function(metres, resolution) {
+
+        return Math.round(metres/resolution).toFixed(1);
+    };
+
     var colour_map = {
         land : {
             outline : {
@@ -67,44 +72,66 @@
 
     var style = function(feature,resolution) {
 
+        //NOTE WELL resolution is metres per pixel
+        //Units are in pixels
         var properties = feature.getProperties();
         var fill =  new ol.style.Fill({ color : ''}),
             stroke = new ol.style.Stroke({color : '', width : 1}),
+            line_casing_stroke = new ol.style.Stroke({color : '', width : 1}),
+            line_fill_stroke = new ol.style.Stroke({color : '', width : 1}),
+            line_centre_stroke = new ol.style.Stroke({color : '', width : 1, lineCap : 'butt'}),
             polygon = new ol.style.Style({fill : fill, stroke : stroke}),
-            line = new ol.style.Style({stroke : stroke});
+            line_casing = new ol.style.Style({stroke : line_casing_stroke, zIndex : 0}),
+            line_fill   = new ol.style.Style({stroke : line_fill_stroke, zIndex : 1}),
+            line_centre =  new ol.style.Style({stroke : line_centre_stroke, zIndex : 2});
 
         var style_array = [], length = 0;
 
         //***** COASTLINE AND LAND
-        if (properties.layer == 'strategi_coast') {
+        if (properties.layer == 'world_coast') {
             fill.setColor(colour_map.land.fill.land);
             stroke.setColor(colour_map.land.fill.land);
             style_array[length++] = polygon;
         }
 
-       //** URBAN REGION
-        if (properties.layer == 'strategi_urban_region') {
-            fill.setColor(colour_map.land.fill.urban_region);
-            stroke.setWidth(0.1);
-            style_array[length++] = polygon;
+       //** MOTORWAY
+        if (properties.layer == 'uk_motorway_overview') {
+
+            line_casing_stroke.setWidth(pixel_metres(500,resolution));
+            line_casing_stroke.setColor(colour_map.road.casing.motorway);
+            line_fill_stroke.setWidth(pixel_metres(400,resolution));
+            line_fill_stroke.setColor(colour_map.road.fill.motorway);
+
+            style_array[length++] = line_casing;
+            style_array[length++] = line_fill;
         }
 
-        //** WOODLAND REGION
-        if (properties.layer == 'strategi_woodland_region') {
-            fill.setColor(colour_map.land.fill.woodland_region);
-            stroke.setWidth(0.1);
-            style_array[length++] = polygon;
+        //* PRIMARY ROAD
+
+        if (properties.layer == 'uk_primary_overview') {
+
+            line_casing_stroke.setWidth(pixel_metres(400,resolution));
+            line_casing_stroke.setColor(colour_map.road.casing.primary);
+            line_fill_stroke.setWidth(pixel_metres(300,resolution));
+            line_fill_stroke.setColor(colour_map.road.fill.primary);
+
+            style_array[length++] = line_casing;
+            style_array[length++] = line_fill;
         }
 
-        //** LAKES REGION
-        if (properties.layer == 'strategi_lakes_region') {
-            fill.setColor(colour_map.land.fill.lakes_region);
-            stroke.setWidth(0.1);
-            style_array[length++] = polygon;
+        //* SECONDARY ROAD
+
+        if (properties.layer == 'uk_secondary_overview') {
+
+            line_casing_stroke.setWidth(pixel_metres(200,resolution));
+            line_casing_stroke.setColor(colour_map.road.casing.secondary);
+            line_fill_stroke.setWidth(pixel_metres(150,resolution));
+            line_fill_stroke.setColor(colour_map.road.fill.secondary);
+
+            style_array[length++] = line_casing;
+            style_array[length++] = line_fill;
         }
-
-
-        //** STRATEGI RIVERS
+        /** STRATEGI RIVERS
         if (properties.layer == 'strategi_river_line') {
 
             // LARGE RIVER
@@ -120,7 +147,7 @@
             }
 
             style_array[length++] = line;
-        }
+        }*/
 
         return style_array;
     };
@@ -140,7 +167,7 @@
         target: 'map',
         view: new ol.View({
             center: [-150000,7345629],
-            zoom: 10
+            zoom: 9
         })
     });
 </script>

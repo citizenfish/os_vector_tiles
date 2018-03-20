@@ -29,21 +29,20 @@ my @tippecanoe;
 if(! -d $layers->{'config'}->{'tmp_dir'} ){
     make_path($layers->{'config'}->{'tmp_dir'});
 } else {
-    print "CLEANING TMP DIR\n";
-    system('rm -rf '. $layers->{'config'}->{'tmp_dir'}.'*');
+    #print "CLEANING TMP DIR\n";
+    #system('rm -rf '. $layers->{'config'}->{'tmp_dir'}.'*');
 }
 
 #Make any new shapefiles if required
 
-if(defined($layers->{'config'}->{'uk_shapefiles'})) {
+if(defined($layers->{'config'}->{'merge_shapefiles'})) {
 
-    make_uk_shapefiles($layers->{'config'}->{'uk_shapefiles'}, $layers->{'config'}->{'tmp_dir'});
-    exit;
+    merge_shapefiles($layers->{'config'}->{'merge_shapefiles'});
+
 }
 
 
 
-exit;
 #First make our temp GeoJSON files
 
 foreach my $keys (keys %{$layers->{'layers'}}) {
@@ -52,7 +51,12 @@ foreach my $keys (keys %{$layers->{'layers'}}) {
     #$keys contains hashname and points to an array of layers
     foreach my $layer (@{$layers->{'layers'}->{$keys}}) {
         print "Constructing from source " . $layer->{'name'} . "\n" if $debug eq 'true';
-        push (@tippecanoe, make_geojson($layer, $layers->{'config'}->{'tmp_dir'}, $keys, $skip_geo));
+
+        if(!defined($layer->{'skip'}) || $layer->{'skip'} ne 'y') {
+            push (@tippecanoe, make_geojson($layer, $layers->{'config'}->{'tmp_dir'}, $keys, $skip_geo));
+        } else {
+            print "SKIPPING  $layer->{'name'}\n";
+        }
 
     }
 }
@@ -68,37 +72,47 @@ foreach my $geojson (@tippecanoe) {
 
 #Forgive me father for I have sinned ... quick hacky way to change format type
 if($tile_format eq 'mbtiles') {
-    print "WRITING TILES TO MBTILES FILE: " .  $layers->{'config'}->{'output_file'};
+    print "WRITING TILES TO MBTILES FILE: " .  $layers->{'config'}->{'output_file'} ."\n";
     $tippecanoe_command .= ' -f -o ' . $layers->{'config'}->{'output_file'};
 } else {
-    print "WRITING TILES TO DIRECTORY " . $layers->{'config'}->{'output_directory'};
+    print "WRITING TILES TO DIRECTORY " . $layers->{'config'}->{'output_directory'} ."\n";
     $tippecanoe_command .= ' -pC -f -e ' . $layers->{'config'}->{'output_directory'};
 }
 
 
 
-print "$tippecanoe_command\n";
+print "$tippecanoe_command\n" if $debug eq 'true';
 my $tipp = `$tippecanoe_command`;
 
 
-sub make_uk_shapefiles {
+sub merge_shapefiles {
 
     my $shapefiles = shift;
-    my $tmp_dir = shift;
 
     foreach my $shapefile (@{$shapefiles}) {
 
-        my $out_file =  $tmp_dir . $shapefile->{'name'} . '.shp';
+        my $out_file = $shapefile->{'output_file'};
         print "Making shapefile $shapefile->{'name'} into $out_file\n";
-        system('rm ' . $out_file) if (-e $out_file);
-        my $rule = File::Find::Rule->new;
-        $rule->file;
-        #$rule->name($shapefile->{'find'});
-        my @files = $rule->file()->name($shapefile->{'find'})->in($shapefile->{'path'});
+        if (-e $out_file && $shapefile->{'overwrite'} eq 'n') {
+            print "$out_file EXISTS already\n";
+            return;
+        }
 
-        print "DEBUG\n";
-        print Dumper(@files);
+        system('rm ' . $out_file)  if (-e $out_file);
 
+        my $rule  = File::Find::Rule->new;
+        my @files = $rule->file()->name(qr/$shapefile->{'regex'}/)->in($shapefile->{'search_path'});
+
+        for my $file (@files) {
+
+            if(-e $out_file) {
+                print "ADDING $file\n";
+                system 'ogr2ogr -update -append '.$out_file .' '.$file;
+            } else {
+                print "CREATING $out_file with $file\n";
+                system  'ogr2ogr ' . $out_file .' '.$file;
+            }
+        }
     }
 }
 
@@ -121,11 +135,13 @@ sub make_geojson {
     #output file name
     my($filename, $dirs, $suffix) = fileparse($layer->{'file'}, '.shp');
 
-    print "FILENAME $filename\n";
+    (my $uname = lc($layer->{'name'})) =~ s/[ ]/_/g ;
 
-    $filename = $tmp_dir . $filename . '.geojson';
+    print "FILENAME $filename  $uname\n";
 
-    return '-L ' . $tippecanoe_layer . ':' . $filename if($skip_geo eq 'y');
+    $filename = $tmp_dir . $uname . '_' . $filename . '.geojson';
+
+    return '-L ' . $tippecanoe_layer . ':' . $filename if($skip_geo eq 'y' && -e $filename);
 
     #Get layer name from the shapefile for use in the attribute selection SQL.
     my $get_layer_name = 'ogrinfo -al -so ' . $layer->{'file'} . ' | grep \'Layer name\'';
@@ -144,12 +160,15 @@ sub make_geojson {
     }
 
     #we pull the attributes we want in GeoJSON using an SQLite query
-    $command .=' -dialect SQLite -sql ' . (
-                                           exists($layer->{'attrs'}->[0])   ?  '"SELECT '. join(',', @{$layer->{'attrs'}}) . ',geometry' .
+    $command .=' -dialect SQLite -sql "' . (
+                                           exists($layer->{'attrs'}->[0])   ?  'SELECT '. join(',', @{$layer->{'attrs'}}) . ',geometry' .
                                                                                                $additional_attributes .
-                                                                                               ' FROM ' . $layer_name.'" '
-                                                                            :  '"SELECT geometry FROM ' . $layer_name.'" '
-                                          );
+                                                                                               ' FROM ' . $layer_name.' '
+                                                                            :  'SELECT geometry  FROM ' . $layer_name.' '
+                                          )
+                                         . (defined($layer->{'selector'} )     ? ' WHERE ' . $layer->{'selector'}
+                                                                              : '')
+                                         . '" ';
 
     #final command construction
     $command .= $filename . '.tmp ' . $layer->{'file'};
@@ -157,6 +176,7 @@ sub make_geojson {
     #Remove existing tmp file
     #unlink($filename . '.tmp');
     print "OGR COMMAND $command\n" if $debug eq 'true';
+
     my $result = `$command`;
     print "$layer_name". ($result eq '' ? " OGR complete\n" : " OGR failed $result\n");
 
