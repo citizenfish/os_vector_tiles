@@ -5,7 +5,7 @@
     "tmp_dir": "/opt/nautoguide/fast_mount/vector_tiles/tmp/",
     "minzoom": 0,
     "maxzoom": 12,
-    "detail_level": 4,
+    "detail_level": 11,
     "merge_shapefiles": [
       {
          "name": "uk_openroads",
@@ -54,11 +54,22 @@
         "skip" : "n"
       }
     ],
+    "national_park": [
+      {
+        "name": "National Park",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/national_park.shp",
+        "maxzoom": 13,
+        "minzoom": 7,
+        "attrs": [
+          "code,legend,name"
+        ]
+      }
+    ],
     "uk_motorway_overview": [
       {
         "name": "UK Motorway Overview",
         "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
-        "maxzoom": 12,
+        "maxzoom": 13,
         "minzoom": 8,
         "selector" : "class = 'Motorway' AND formofway != 'Slip Road'",
         "attrs": [
@@ -70,8 +81,8 @@
       {
         "name": "UK Primary Overview",
         "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
-        "maxzoom": 12,
-        "minzoom": 9,
+        "maxzoom": 13,
+        "minzoom": 8,
         "selector" : "class = 'A Road' AND formofway != 'Slip Road'",
         "attrs": [
           "roadnumber", "class", "formOfWay"
@@ -82,7 +93,7 @@
       {
         "name": "UK Secondary Overview",
         "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
-        "maxzoom": 12,
+        "maxzoom": 13,
         "minzoom": 10,
         "selector" : "(class = 'B Road' OR class = 'Classified Unnumbered') AND formofway != 'Slip Road'",
         "attrs": [
@@ -94,8 +105,8 @@
       {
         "name": "UK Unclassified Overview",
         "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
-        "maxzoom": 12,
-        "minzoom": 10,
+        "maxzoom": 13,
+        "minzoom": 11,
         "selector" : "(class = 'Not Classified' OR class = 'Unclassified') AND formofway != 'Slip Road'",
         "attrs": [
           "roadnumber", "class", "formOfWay"

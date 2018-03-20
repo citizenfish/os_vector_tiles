@@ -17,9 +17,11 @@
 <div id="map"></div>
 <script>
 
-    var pixel_metres = function(metres, resolution) {
+    var stops = function(stop_array) {
 
-        return Math.round(metres/resolution).toFixed(1);
+        var zoom  = map.getView().getZoom();
+
+
     };
 
     var colour_map = {
@@ -29,9 +31,10 @@
             },
             fill : {
                 water : "rgb(158,189,255)",
-                land  : "rgb(255,255,255)",
+                land  : "rgb(242,241,237)",
                 urban_region : "#F2E6D4",
                 woodland_region :  "rgb(227,242,226)",
+                national_park :  "rgb(186,231,169)",
                 lakes_region : "rgb(228,244,247)",
                 foreshore_sand_region : "rgb(255,255,204)",
                 foreshore_other_region : "rgb(239,231,189)",
@@ -70,82 +73,61 @@
         }
     };
 
+    var index_map = {
+        "land" : 0,
+        "national_park" : 1,
+        "woodland" : 2,
+
+        "motorway" : 20,
+        "primary" : 25
+    };
+
+
+    var style_maker = function(params) {
+
+        var fill =  new ol.style.Fill({ color : params.fcolor || ''}),
+            stroke = new ol.style.Stroke({color : params.scolor || params.fcolor, width : params.width || 1});
+
+        return  new ol.style.Style({fill : fill, stroke : stroke, zIndex : params.zIndex || 0});
+
+    };
     var style = function(feature,resolution) {
 
         //NOTE WELL resolution is metres per pixel
         //Units are in pixels
         var properties = feature.getProperties();
-        var fill =  new ol.style.Fill({ color : ''}),
-            stroke = new ol.style.Stroke({color : '', width : 1}),
-            line_casing_stroke = new ol.style.Stroke({color : '', width : 1}),
-            line_fill_stroke = new ol.style.Stroke({color : '', width : 1}),
-            line_centre_stroke = new ol.style.Stroke({color : '', width : 1, lineCap : 'butt'}),
-            polygon = new ol.style.Style({fill : fill, stroke : stroke}),
-            line_casing = new ol.style.Style({stroke : line_casing_stroke, zIndex : 0}),
-            line_fill   = new ol.style.Style({stroke : line_fill_stroke, zIndex : 1}),
-            line_centre =  new ol.style.Style({stroke : line_centre_stroke, zIndex : 2});
 
         var style_array = [], length = 0;
 
-        //***** COASTLINE AND LAND
-        if (properties.layer == 'world_coast') {
-            fill.setColor(colour_map.land.fill.land);
-            stroke.setColor(colour_map.land.fill.land);
-            style_array[length++] = polygon;
+        //* NATIONAL PARK
+        if (properties.layer == 'national_park') {
+                style_array[length++] = new style_maker({fcolor : colour_map.land.fill.national_park, zIndex : index_map.national_park});
         }
 
+        //***** COASTLINE AND LAND
+        if (properties.layer == 'world_coast') {
+            style_array[length++] = new style_maker({fcolor : colour_map.land.fill.land, zIndex : index_map.land});
+        }
+        
        //** MOTORWAY
         if (properties.layer == 'uk_motorway_overview') {
-
-            line_casing_stroke.setWidth(pixel_metres(500,resolution));
-            line_casing_stroke.setColor(colour_map.road.casing.motorway);
-            line_fill_stroke.setWidth(pixel_metres(400,resolution));
-            line_fill_stroke.setColor(colour_map.road.fill.motorway);
-
-            style_array[length++] = line_casing;
-            style_array[length++] = line_fill;
+            style_array[length++] = new style_maker({scolor : colour_map.road.casing.motorway, zIndex : index_map.motorway, width : 3});
+            style_array[length++] = new style_maker({scolor : colour_map.road.fill.motorway, zIndex : index_map.motorway + 1, width : 2});
         }
 
         //* PRIMARY ROAD
         if (properties.layer == 'uk_primary_overview') {
-
-            line_casing_stroke.setWidth(pixel_metres(400,resolution));
-            line_casing_stroke.setColor(colour_map.road.casing.primary);
-            line_fill_stroke.setWidth(pixel_metres(300,resolution));
-            line_fill_stroke.setColor(colour_map.road.fill.primary);
-
-            style_array[length++] = line_casing;
-            style_array[length++] = line_fill;
+            style_array[length++] = new style_maker({scolor : colour_map.road.casing.primary, zIndex : index_map.primary, width : 2});
+            style_array[length++] = new style_maker({scolor : colour_map.road.fill.primary, zIndex : index_map.primary + 1, width : 1});
         }
 
         //* SECONDARY ROAD
         if (properties.layer == 'uk_secondary_overview') {
-
-            line_casing_stroke.setWidth(pixel_metres(200,resolution));
-            line_casing_stroke.setColor(colour_map.road.casing.secondary);
-            line_fill_stroke.setWidth(pixel_metres(150,resolution));
-            line_fill_stroke.setColor(colour_map.road.fill.secondary);
-
-            style_array[length++] = line_casing;
-            style_array[length++] = line_fill;
+            style_array[length++] = new style_maker({scolor : colour_map.road.casing.secondary, zIndex : index_map.primary, width : 1});
+            style_array[length++] = new style_maker({scolor : colour_map.road.fill.secondary, zIndex : index_map.primary + 1, width : 0.5});
         }
-        /** STRATEGI RIVERS
-        if (properties.layer == 'strategi_river_line') {
 
-            // LARGE RIVER
-            if( [5212,5213,5222].indexOf(properties.CODE !== -1) ) {
-                stroke.setWidth(2);
-                stroke.setColor(colour_map.land.fill.river_line);
-            }
 
-            // SMALL RIVER
-            if( [5212,5213,5222].indexOf(properties.CODE !== -1) ) {
-                stroke.setWidth(0.8);
-                stroke.setColor(colour_map.land.fill.river_line);
-            }
-
-            style_array[length++] = line;
-        }*/
 
         return style_array;
     };
