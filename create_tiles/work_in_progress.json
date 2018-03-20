@@ -5,7 +5,7 @@
     "tmp_dir": "/opt/nautoguide/fast_mount/vector_tiles/tmp/",
     "minzoom": 0,
     "maxzoom": 12,
-    "detail_level": 6,
+    "detail_level": 4,
     "merge_shapefiles": [
       {
          "name": "uk_openroads",
@@ -13,6 +13,20 @@
          "regex": "[A-Z]{2}_RoadLink\\.shp",
          "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
          "overwrite" : "n"
+      },
+      {
+        "name": "uk_water_line",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_SurfaceWater_Line\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openmap_all_surfacewater_line.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_water_area",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_SurfaceWater_Area\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openmap_all_surfacewater_area.shp",
+        "overwrite" : "n"
       }
     ]
   },

@@ -95,7 +95,7 @@ sub merge_shapefiles {
         print "Making shapefile $shapefile->{'name'} into $out_file\n";
         if (-e $out_file && $shapefile->{'overwrite'} eq 'n') {
             print "$out_file EXISTS already\n";
-            return;
+            next;
         }
 
         system('rm ' . $out_file)  if (-e $out_file);
