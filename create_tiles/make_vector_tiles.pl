@@ -12,8 +12,9 @@ my $config = "./config.json";
 my $skip_geo ='n';
 my $tile_format = 'mbtiles';
 my $debug = 'false';
+my $merge_only = 'n';
 
-GetOptions('config=s' => \$config, 'skip_geo=s' => \$skip_geo, 'tile_format=s' => \$tile_format, 'debug=s' => \$debug);
+GetOptions('config=s' => \$config, 'skip_geo=s' => \$skip_geo, 'tile_format=s' => \$tile_format, 'debug=s' => \$debug, 'merge_only=s' => \$merge_only);
 
 
 my $json = JSON->new->utf8;
@@ -38,6 +39,8 @@ if(! -d $layers->{'config'}->{'tmp_dir'} ){
 if(defined($layers->{'config'}->{'merge_shapefiles'})) {
 
     merge_shapefiles($layers->{'config'}->{'merge_shapefiles'});
+
+    exit if ($merge_only eq 'y');
 
 }
 

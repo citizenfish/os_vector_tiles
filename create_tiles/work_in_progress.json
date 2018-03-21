@@ -18,16 +18,122 @@
         "name": "uk_water_line",
         "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
         "regex": "[A-Z]{2}_SurfaceWater_Line\\.shp",
-        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openmap_all_surfacewater_line.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_surfacewater_line.shp",
         "overwrite" : "n"
       },
       {
         "name": "uk_water_area",
         "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
         "regex": "[A-Z]{2}_SurfaceWater_Area\\.shp",
-        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openmap_all_surfacewater_area.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_surfacewater_area.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_building",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_Building\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_building.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_foreshore",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_Foreshore\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_foreshore.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_functional_site",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_FunctionalSite\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_functional_site.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_important_building",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_ImportantBuilding\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_important_building.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_motorway_junction",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_MotorwayJunction\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_motorway_junction.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_named_place",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_NamedPlace\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_named_place.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_railway_station",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_RailwayStation\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_railway_station.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_railway_track",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_RailwayTrack\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_railway_track.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_railway_tunnel",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_RailwayTunnel\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_railway_tunnel.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_road",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_Road\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_road.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_road_tunnel",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_RoadTunnel\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_road_tunnel.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_roundabout",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_Roundabout\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_roundabout.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_tidal_boundary",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_TidalBoundary\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_tidal_boundary.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_tidal_water",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_TidalWater\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_tidal_water.shp",
+        "overwrite" : "n"
+      },
+      {
+        "name": "uk_woodland",
+        "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
+        "regex": "[A-Z]{2}_Woodland\\.shp",
+        "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_woodland.shp",
         "overwrite" : "n"
       }
+
     ]
   },
   "layers": {
@@ -68,7 +174,7 @@
     "uk_motorway_overview": [
       {
         "name": "UK Motorway Overview",
-        "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openroads_all_roads.shp",
         "maxzoom": 13,
         "minzoom": 8,
         "selector" : "class = 'Motorway' AND formofway != 'Slip Road'",
@@ -80,7 +186,7 @@
     "uk_primary_overview": [
       {
         "name": "UK Primary Overview",
-        "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openroads_all_roads.shp",
         "maxzoom": 13,
         "minzoom": 8,
         "selector" : "class = 'A Road' AND formofway != 'Slip Road'",
@@ -92,7 +198,7 @@
     "uk_secondary_overview": [
       {
         "name": "UK Secondary Overview",
-        "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openroads_all_roads.shp",
         "maxzoom": 13,
         "minzoom": 10,
         "selector" : "(class = 'B Road' OR class = 'Classified Unnumbered') AND formofway != 'Slip Road'",
@@ -104,7 +210,7 @@
     "uk_unclassified_overview": [
       {
         "name": "UK Unclassified Overview",
-        "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openroads_all_roads.shp",
         "maxzoom": 13,
         "minzoom": 12,
         "selector" : "(class = 'Not Classified' OR class = 'Unclassified') AND formofway != 'Slip Road'",
@@ -264,6 +370,171 @@
         "minzoom": 9,
         "attrs": [
           "code,legend,name,orient,font_size,anchor_pt"
+        ]
+      }
+    ],
+    "uk_road": [
+      {
+        "name": "Openmap Road",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_road.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "classifica","roadnumber","featcode"
+        ]
+      }
+    ],
+    "uk_building": [
+      {
+        "name": "Openmap Building",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_building.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ]
+      }
+    ],
+    "uk_foreshore": [
+      {
+        "name": "Openmap Foreshore",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_foreshore.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ]
+      }
+    ],
+    "uk_functionalsite": [
+      {
+        "name": "Openmap Functional Site",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_functional_site.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "distname,sitetheme,classifica,featcode"
+        ]
+      }
+    ],
+    "uk_important_building": [
+      {
+        "name": "Openmap Important Building",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_important_building.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode,buildgthem,classifica,distname"
+        ]
+      }
+    ],
+    "uk_motorway_junction": [
+      {
+        "name": "Openmap Motorway Junction",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_motorway_junction.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "junctnum,featcode"
+        ]
+      }
+    ],
+    "uk_namedplace": [
+      {
+        "name": "Openmap Named Place",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_named_place.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "distname,htmlname,classifica,fontheight,orientatio,featcode"
+        ]
+      }
+    ],
+    "uk_railwaystation": [
+      {
+        "name": "Openmap Railway Station",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_railway_station.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "distname,classifica,featcode"
+        ]
+      }
+    ],
+    "uk_railwaytrack": [
+      {
+        "name": "Openmap Railway Track",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_railway_track.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "classifica,featcode"
+        ]
+      }
+    ],
+    "uk_railwaytunnel": [
+      {
+        "name": "Openmap Railway Tunnel",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_railway_tunnel.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ]
+      }
+    ],
+    "uk_roadtunnel": [
+      {
+        "name": "Openmap Road Tunnel",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_road_tunnel.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ]
+      }
+    ],
+    "uk_roundabout": [
+      {
+        "name": "Openmap Roundabout",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_roundabout.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode,classifica"
+        ]
+      }
+    ],
+    "uk_tidalboundary": [
+      {
+        "name": "Openmap Tidal Boundary",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_tidal_boundary.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode,classifica"
+        ]
+      }
+    ],
+    "uk_tidalwater": [
+      {
+        "name": "Openmap Tidal Water",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_tidal_water.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ]
+      }
+    ],
+    "uk_woodland": [
+      {
+        "name": "Openmap Woodland",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_woodland.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
         ]
       }
     ]

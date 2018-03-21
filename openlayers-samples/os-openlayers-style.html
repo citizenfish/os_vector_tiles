@@ -18,17 +18,24 @@
 <div id="map"></div>
 <script>
 
+    //Openlayers will overzoom beyond the maxZoom figure set here
+    var tilegrid = ol.tilegrid.createXYZ({tileSize: 512, maxZoom: 15});
+
+    var source = new ol.source.VectorTile({
+        format: new ol.format.MVT(),
+        tileGrid: tilegrid,
+        tilePixelRatio: 8,
+        url: 'https://images.tilecache.net/maptiles/vtdev/strategi_zip/{z}/{x}/{y}.pbf',
+        "background-color":  "rgb(158,189,255)"
+    });
+
 
     var map = new ol.Map({
         layers: [
             new ol.layer.VectorTile({
-                source: new ol.source.VectorTile({
-                    format: new ol.format.MVT(),
-                    //url : 'http://yaxi/vtiles/{z}/{x}/{y}.pbf',
-                    url: 'https://images.tilecache.net/maptiles/vtdev/strategi_zip/{z}/{x}/{y}.pbf',
-                    "background-color": colour_map.land.fill.water
-                }),
+                source: source,
                 style: window.styles.vbase,
+                //for label decluttering
                 declutter: true
             })
         ],
