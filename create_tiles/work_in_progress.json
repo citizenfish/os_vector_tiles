@@ -117,7 +117,7 @@
       {
         "name": "Urban Region",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/urban_region.shp",
-        "maxzoom": 13,
+        "maxzoom": 11,
         "minzoom": 8,
         "attrs": [
           "code"
@@ -195,7 +195,7 @@
         "name": "River Line",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/rivers_line.shp",
         "maxzoom": 13,
-        "minzoom": 8,
+        "minzoom": 10,
         "attrs": [
           "code"
         ]
@@ -217,7 +217,7 @@
         "name": "Settlement Seed",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/settlement_seed.shp",
         "maxzoom": 13,
-        "minzoom": 9,
+        "minzoom": 7,
         "attrs": [
           "code,legend,name,admin_name,location"
         ]
