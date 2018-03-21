@@ -18,7 +18,7 @@ window.styles.vbase = function(feature,resolution) {
                 national_park :  "rgb(232,249,228)",
                 lakes_region : "rgb(213,244,248)",
                 foreshore_sand_region : "rgb(255,255,204)",
-                foreshore_other_region : "rgb(239,231,189)",
+                foreshore_other_region : "rgb(239,231,189)"
 
             }
         },
@@ -86,7 +86,7 @@ window.styles.vbase = function(feature,resolution) {
         "rail"     : 10,
 
         "motorway" : 20,
-        "primary" : 25,
+        "primary" : 25
 
 
     };
@@ -103,9 +103,9 @@ window.styles.vbase = function(feature,resolution) {
         "uk_secondary_overview" : [{scolor : colour_map.road.casing.secondary, zIndex : index_map.primary, width : widths.secondary},{scolor : colour_map.road.fill.secondary, zIndex : index_map.primary + 1, width : widths.secondary -0.5}],
         "uk_unclassified_overview" : [{scolor : colour_map.road.casing.secondary, zIndex : index_map.primary, width : widths.unclassified}],
         "uk_railway_line" : [{scolor : colour_map.rail.fill.rail_line, zIndex : index_map.rail, width : widths.railway_line}],
-        "uk_river_line" : function(properties,resolution) {
+        "uk_river_line" : function(properties) {
 
-            if([5211,5221,5230].indexOf(properties.CODE) !== -1) {
+            if([5211,5221,5230].indexOf(properties['CODE']) !== -1) {
                 return [{scolor : colour_map.river.fill.river_line, zIndex : index_map.river, width : widths.river_large}];
             }
 
@@ -114,21 +114,21 @@ window.styles.vbase = function(feature,resolution) {
         "uk_transport_text" : function(properties,resolution) {
 
             //Motorway label
-            if(properties.CODE == 5031) {
-                return [{text: properties.NAME, labelOnly: true, textFill: colour_map.road.fill.motorway, textColor: colour_map.road.fill.motorway_centre}];
+            if(properties['CODE'] === 5031) {
+                return [{text: properties['NAME'], labelOnly: true, textFill: colour_map.road.fill.motorway, textColor: colour_map.road.fill.motorway_centre}];
             }
 
             //Primary rtoad label
-            if([5032,5033].indexOf(properties.CODE) !== -1 && resolution < 200) {
-                return [{text: properties.NAME, labelOnly: true, textFill: colour_map.road.fill.primary, textColor: colour_map.road.fill.motorway_centre}];
+            if([5032,5033].indexOf(properties['CODE']) !== -1 && resolution < 200) {
+                return [{text: properties['NAME'], labelOnly: true, textFill: colour_map.road.fill.primary, textColor: colour_map.road.fill.motorway_centre}];
             }
             return [];
         },
-        "uk_settlement_seed" : function(properties,resolution) {
+        "uk_settlement_seed" : function(properties) {
 
             //City Labels
-            if(properties.CODE == 5427) {
-                return [{text: properties.NAME, labelOnly: true, textFill: colour_map.label.city.city_label, textColor: colour_map.label.city.city_halo}];
+            if(properties['CODE'] === 5427) {
+                return [{text: properties['NAME'], labelOnly: true, textFill: colour_map.label.city.city_label, textColor: colour_map.label.city.city_halo}];
             }
 
             return [];
