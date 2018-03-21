@@ -118,7 +118,7 @@
         "name": "Urban Region",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/urban_region.shp",
         "maxzoom": 11,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code"
         ]
@@ -129,7 +129,7 @@
         "name": "Woodland Region",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/woodland_region.shp",
         "maxzoom": 13,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code"
         ]
@@ -140,7 +140,7 @@
         "name": "Lakes Region",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/lakes_region.shp",
         "maxzoom": 13,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code"
         ]
@@ -151,7 +151,7 @@
         "name": "Foreshore Region",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/foreshor_region.shp",
         "maxzoom": 13,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code"
         ]
@@ -162,7 +162,7 @@
         "name": "General Text",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/general_text.shp",
         "maxzoom": 13,
-        "minzoom": 8,
+        "minzoom": 9,
         "attrs": [
           "code,legend,name,orient,font_size,anchor_pt"
         ]
@@ -173,7 +173,7 @@
         "name": "Railway Line",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/railway_line.shp",
         "maxzoom": 13,
-        "minzoom": 9,
+        "minzoom": 10,
         "attrs": [
           "code,legend"
         ]
@@ -184,7 +184,7 @@
         "name": "Railway Point",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/railway_point.shp",
         "maxzoom": 13,
-        "minzoom": 9,
+        "minzoom": 10,
         "attrs": [
           "code,legend,name,orient"
         ]
