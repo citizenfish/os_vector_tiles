@@ -123,6 +123,28 @@
           "code"
         ]
       }
+    ],
+    "uk_woodland_region": [
+      {
+        "name": "Woodland Region",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/woodland_region.shp",
+        "maxzoom": 13,
+        "minzoom": 8,
+        "attrs": [
+          "code"
+        ]
+      }
+    ],
+    "uk_lakes_region": [
+      {
+        "name": "Lakes Region",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/lakes_region.shp",
+        "maxzoom": 13,
+        "minzoom": 8,
+        "attrs": [
+          "code"
+        ]
+      }
     ]
   }
 }
