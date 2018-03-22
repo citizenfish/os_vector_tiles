@@ -42,7 +42,8 @@ window.styles.vbase = function(feature,resolution) {
                 uk_unclassified : "rgb(80,80,80)",
                 uk_local : "rgb(80,80,80)",
                 uk_b : "rgb(80,80,80)",
-                uk_a : "rgb(80,80,80)"
+                uk_a : "rgb(80,80,80)",
+                uk_motorway : "rgb(80,80,80)"
             },
             fill: {
                 motorway: "rgb(6,177,202)",
@@ -61,8 +62,9 @@ window.styles.vbase = function(feature,resolution) {
                 uk_b : "rgb(255,192,115)",
                 uk_b_centreline : "rgb(80,80,80)",
                 uk_a : "rgb(255,135,158)",
-                uk_primary : "rgb(55,195,91)",
-                uk_a_centreline : "rgb(80,80,80)"
+                uk_primary : "rgb(255,255,255)",
+                uk_a_centreline : "rgb(255,255,255)",
+                uk_motorway: "rgb(114,198,202)"
             },
             label :{
                 motorway_junction : {
@@ -112,6 +114,9 @@ window.styles.vbase = function(feature,resolution) {
         uk_a_case: [[13,2], [14,3], [15,7],[17,14]],
         uk_a_fill: [[13,1], [14,2.5], [15,6],[17,13]],
         uk_a_centreline: [[13,0.5], [14,0.5], [15,1]],
+        uk_motorway_case: [[13,3], [14,4], [15,8],[17,15]],
+        uk_motorway_fill: [[13,2], [14,3.5], [15,6],[17,13]],
+        uk_motorway_centreline: [[13,0.5], [14,0.5], [15,1]]
     };
 
     var index_map = {
@@ -254,6 +259,19 @@ window.styles.vbase = function(feature,resolution) {
 
                 if(properties.CLASSIFICA == 'A Road, Collapsed Dual Carriageway' || properties.CLASSIFICA == 'Primary Road, Collapsed Dual Carriageway') {
                     styles.push({fcolor: colour_map.road.fill.uk_a_centreline, width: widths.uk_a_centreline, zIndex: index_map.uk_road_a_centre});
+                }
+            }
+
+            ///MOTORWAY
+            if(['Motorway, Collapsed Dual Carriageway', 'Motorway'].indexOf(properties.CLASSIFICA) !== -1 ) {
+
+                //Case
+                styles.push({fcolor: colour_map.road.casing.uk_motorway, width: widths.uk_motorway_case, zIndex: index_map.uk_road_motorway_case});
+                //Fill
+                styles.push({fcolor: colour_map.road.fill.uk_motorway, width: widths.uk_motorway_fill, zIndex: index_map.uk_road_motorway_fill});
+
+                if(properties.CLASSIFICA == 'Motorway, Collapsed Dual Carriageway') {
+                    styles.push({fcolor: colour_map.road.fill.uk_motorway_centreline, width: widths.uk_motorway_centreline, zIndex: index_map.uk_road_motorway_centre});
                 }
             }
             return styles;
