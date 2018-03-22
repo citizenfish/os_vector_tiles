@@ -8,7 +8,8 @@ window.styles.vbase = function(feature,resolution) {
     var colour_map = {
         land : {
             outline : {
-                black : "rgb(0,0,0)"
+                black : "rgb(0,0,0)",
+                black_trans: "rgb(0,0,0,0.25)"
             },
             fill : {
                 water : "rgb(213,244,248)",
@@ -22,6 +23,7 @@ window.styles.vbase = function(feature,resolution) {
                 uk_tidal_water : "rgb(213,244,248)",
                 uk_foreshore: "rgb(230,235,228)",
                 uk_building: "rgb(254,222,183)",
+                uk_important_building: "rgb(254,222,183,0.25)",
                 air_transport : "rgb(255,255,127,0.25)",
                 education : "rgb(219,127,255,0.25)",
                 medical_centre: "rgb(127,255,136, 0.25)",
@@ -136,9 +138,9 @@ window.styles.vbase = function(feature,resolution) {
         uk_tidal_water : 27,
         uk_water_area:    28,
         uk_foreshore:     29,
-        uk_building: 30,
+        uk_building: 32,
         uk_functional_site : 31,
-        uk_important_building: 32,
+        uk_important_building: 30,
         uk_tidal_boundary: 33,
         uk_surface_water_line: 34,
 
@@ -201,7 +203,7 @@ window.styles.vbase = function(feature,resolution) {
         uk_water_area               : [{fcolor : colour_map.land.fill.uk_water_area, zIndex : index_map.uk_water_area}],
         uk_foreshore                : [{fcolor : colour_map.land.fill.uk_foreshore, zIndex : index_map.uk_foreshore}],
         uk_building                 : [{fcolor : colour_map.land.fill.uk_building, zIndex : index_map.uk_building, scolor: colour_map.land.outline.black, width: widths.building_outline}],
-        uk_important_building       : [{fcolor : colour_map.land.fill.uk_building, scolor: colour_map.land.outline.black, width: widths.building_outline, zIndex : index_map.uk_important_building}],
+        uk_important_building       : [{fcolor : colour_map.land.fill.uk_important_building, scolor: colour_map.land.outline.black_trans, width: widths.building_outline, zIndex : index_map.uk_important_building}],
         uk_surfacewater_line        : [{fcolour: colour_map.river.fill.river_line, width : widths.uk_surface_water_line, zIndex :index_map.uk_surface_water_line}],
         uk_roadtunnel               : [{fcolour: colour_map.road.fill.uk_roadtunnel, linedash: line_dashes.uk_road_tunnel, zIndex: index_map.uk_road_tunnel}],
         uk_road                     : function(properties,resolution) {

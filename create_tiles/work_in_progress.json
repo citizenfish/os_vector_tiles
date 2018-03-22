@@ -366,7 +366,7 @@
       {
         "name": "Transport Text",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/transport_text.shp",
-        "maxzoom": 13,
+        "maxzoom": 11,
         "minzoom": 9,
         "attrs": [
           "code,legend,name,orient,font_size,anchor_pt"
