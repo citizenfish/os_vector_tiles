@@ -176,7 +176,7 @@
         "name": "UK Motorway Overview",
         "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openroads_all_roads.shp",
         "maxzoom": 13,
-        "minzoom": 8,
+        "minzoom": 6,
         "selector" : "class = 'Motorway' AND formofway != 'Slip Road'",
         "attrs": [
           "roadnumber", "class", "formOfWay"

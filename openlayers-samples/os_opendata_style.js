@@ -93,8 +93,7 @@ window.styles.vbase = function(feature,resolution) {
     };
 
     var widths = {
-        motorway : 4,
-        primary: 3,
+
         secondary: 1,
         unclassified : 0.5,
         river_small :  0.1,
@@ -113,8 +112,8 @@ window.styles.vbase = function(feature,resolution) {
         uk_b_case: [[13,2], [14,3], [15,7],[17,14]],
         uk_b_fill: [[13,1], [14,2.5], [15,6],[17,13]],
         uk_b_centreline: [[13,0.5], [14,0.5], [15,1]],
-        uk_a_case: [[13,2], [14,3], [15,7],[17,14]],
-        uk_a_fill: [[13,1], [14,2.5], [15,6],[17,13]],
+        uk_a_case: [[12,2.5],[13,2], [14,3], [15,7],[17,14]],
+        uk_a_fill: [[12,2],[13,1], [14,2.5], [15,6],[17,13]],
         uk_a_centreline: [[13,0.5], [14,0.5], [15,1]],
         uk_motorway_case: [[13,3], [14,4], [15,8],[17,15]],
         uk_motorway_fill: [[13,2], [14,3.5], [15,6],[17,13]],
@@ -193,8 +192,8 @@ window.styles.vbase = function(feature,resolution) {
         uk_urban_region             : [{fcolor : colour_map.land.fill.urban_region, zIndex : index_map.urban_region}],
         uk_woodland_region          : [{fcolor : colour_map.land.fill.woodland_region, zIndex : index_map.woodland_region}],
         uk_lakes_region             : [{fcolor : colour_map.land.fill.lakes_region, zIndex : index_map.lakes_region}],
-        uk_motorway_overview        : [{scolor : colour_map.road.casing.motorway, zIndex : index_map.motorway, width : widths.motorway},{scolor : colour_map.road.fill.motorway, zIndex : index_map.motorway + 1, width : widths.motorway - 0.5}],
-        uk_primary_overview         : [{scolor : colour_map.road.casing.primary, zIndex : index_map.primary, width : widths.primary},{scolor : colour_map.road.fill.primary, zIndex : index_map.primary + 1, width : widths.primary - 0.5}],
+        uk_motorway_overview        : [{scolor : colour_map.road.casing.motorway, zIndex : index_map.motorway, width : widths.uk_motorway_case},{scolor : colour_map.road.fill.motorway, zIndex : index_map.motorway + 1, width : widths.uk_motorway_fill}],
+        uk_primary_overview         : [{scolor : colour_map.road.casing.primary, zIndex : index_map.primary, width : widths.uk_a_case},{scolor : colour_map.road.fill.primary, zIndex : index_map.primary + 1, width : widths.uk_a_fill}],
         uk_secondary_overview       : [{scolor : colour_map.road.casing.secondary, zIndex : index_map.primary, width : widths.secondary},{scolor : colour_map.road.fill.secondary, zIndex : index_map.primary + 1, width : widths.secondary -0.5}],
         uk_unclassified_overview    : [{scolor : colour_map.road.casing.secondary, zIndex : index_map.primary, width : widths.unclassified}],
         uk_railway_line             : [{scolor : colour_map.rail.fill.rail_line, zIndex : index_map.rail, width : widths.railway_line}],
