@@ -4,7 +4,7 @@
     "output_directory": "/opt/nautoguide/fast_mount/vector_tiles/output",
     "tmp_dir": "/opt/nautoguide/fast_mount/vector_tiles/tmp/",
     "minzoom": 0,
-    "maxzoom": 12,
+    "maxzoom": 15,
     "detail_level": 11,
     "merge_shapefiles": [
       {
@@ -15,14 +15,14 @@
          "overwrite" : "n"
       },
       {
-        "name": "uk_water_line",
+        "name": "uk_surfacewater_line",
         "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
         "regex": "[A-Z]{2}_SurfaceWater_Line\\.shp",
         "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_surfacewater_line.shp",
         "overwrite" : "n"
       },
       {
-        "name": "uk_water_area",
+        "name": "uk_surfacewater_area",
         "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data",
         "regex": "[A-Z]{2}_SurfaceWater_Area\\.shp",
         "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_surfacewater_area.shp",
@@ -502,6 +502,28 @@
         "minzoom": 13,
         "attrs": [
           "featcode,classifica"
+        ]
+      }
+    ],
+    "uk_surfacewater_line": [
+      {
+        "name": "Openmap Surface Water Line",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_surfacewater_line.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
+        ]
+      }
+    ],
+    "uk_surfacewater_area": [
+      {
+        "name": "Openmap Surface Water Line",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openmap_all_surfacewater_area.shp",
+        "maxzoom": 16,
+        "minzoom": 13,
+        "attrs": [
+          "featcode"
         ]
       }
     ],
