@@ -4,14 +4,15 @@
     "output_directory": "/opt/nautoguide/fast_mount/vector_tiles/output",
     "tmp_dir": "/opt/nautoguide/fast_mount/vector_tiles/tmp/",
     "minzoom": 0,
-    "maxzoom": 15,
+    "maxzoom": 13,
     "detail_level": 11,
+    "simplify_shapefiles" : [],
     "merge_shapefiles": [
       {
          "name": "uk_openroads",
          "search_path": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data",
          "regex": "[A-Z]{2}_RoadLink\\.shp",
-         "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads.shp",
+         "output_file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads_simplified.shp",
          "overwrite" : "n"
       },
       {
@@ -164,7 +165,7 @@
       {
         "name": "National Park",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/national_park.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
         "minzoom": 7,
         "attrs": [
           "code,legend,name"
@@ -174,8 +175,8 @@
     "uk_motorway_overview": [
       {
         "name": "UK Motorway Overview",
-        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openroads_all_roads.shp",
-        "maxzoom": 13,
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads_simplified.shp",
+        "maxzoom": 12,
         "minzoom": 6,
         "selector" : "class = 'Motorway' AND formofway != 'Slip Road'",
         "attrs": [
@@ -186,21 +187,31 @@
     "uk_primary_overview": [
       {
         "name": "UK Primary Overview",
-        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openroads_all_roads.shp",
-        "maxzoom": 13,
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads_simplified.shp",
+        "maxzoom": 10,
         "minzoom": 8,
-        "selector" : "class = 'A Road' AND formofway != 'Slip Road'",
+        "selector" : "primary_fl = 'true' AND formofway != 'Slip Road'",
         "attrs": [
-          "roadnumber", "class", "formOfWay"
+          "roadnumber", "class", "formOfWay", "primary_fl"
+        ]
+      },
+      {
+        "name": "UK Primary AND A Overview",
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads_simplified.shp",
+        "maxzoom": 12,
+        "minzoom": 11,
+        "selector" : "class = 'A Road'  AND formofway != 'Slip Road'",
+        "attrs": [
+          "roadnumber", "class", "formOfWay", "primary_fl"
         ]
       }
     ],
     "uk_secondary_overview": [
       {
         "name": "UK Secondary Overview",
-        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openroads_all_roads.shp",
-        "maxzoom": 13,
-        "minzoom": 10,
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads_simplified.shp",
+        "maxzoom": 12,
+        "minzoom": 11,
         "selector" : "(class = 'B Road' OR class = 'Classified Unnumbered') AND formofway != 'Slip Road'",
         "attrs": [
           "roadnumber", "class", "formOfWay"
@@ -210,9 +221,9 @@
     "uk_unclassified_overview": [
       {
         "name": "UK Unclassified Overview",
-        "file": "/opt/nautoguide/fast_mount/vector_tiles/openmap/data/openroads_all_roads.shp",
-        "maxzoom": 13,
-        "minzoom": 12,
+        "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads_simplified.shp",
+        "maxzoom": 12,
+        "minzoom": 11,
         "selector" : "(class = 'Not Classified' OR class = 'Unclassified') AND formofway != 'Slip Road'",
         "attrs": [
           "roadnumber", "class", "formOfWay"
@@ -223,7 +234,7 @@
       {
         "name": "Urban Region",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/urban_region.shp",
-        "maxzoom": 11,
+        "maxzoom": 12,
         "minzoom": 9,
         "attrs": [
           "code"
@@ -234,7 +245,7 @@
       {
         "name": "Woodland Region",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/woodland_region.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
         "minzoom": 9,
         "attrs": [
           "code"
@@ -245,7 +256,7 @@
       {
         "name": "Lakes Region",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/lakes_region.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
         "minzoom": 9,
         "attrs": [
           "code"
@@ -256,7 +267,7 @@
       {
         "name": "Foreshore Region",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/foreshor_region.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
         "minzoom": 9,
         "attrs": [
           "code"
@@ -267,7 +278,7 @@
       {
         "name": "General Text",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/general_text.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
         "minzoom": 9,
         "attrs": [
           "code,legend,name,orient,font_size,anchor_pt"
@@ -278,7 +289,7 @@
       {
         "name": "Railway Line",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/railway_line.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
         "minzoom": 10,
         "attrs": [
           "code,legend"
@@ -289,7 +300,7 @@
       {
         "name": "Railway Point",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/railway_point.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
         "minzoom": 10,
         "attrs": [
           "code,legend,name,orient"
@@ -300,7 +311,7 @@
       {
         "name": "River Line",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/rivers_line.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
         "minzoom": 10,
         "attrs": [
           "code"
@@ -311,7 +322,7 @@
       {
         "name": "Admin Line",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/admin_seed.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
         "minzoom": 8,
         "attrs": [
           "code,legend,name,admin_name"
@@ -322,7 +333,7 @@
       {
         "name": "Settlement Seed",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/settlement_seed.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
         "minzoom": 7,
         "attrs": [
           "code,legend,name,admin_name,location"
@@ -333,7 +344,7 @@
       {
         "name": "Road Point",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/road_point.shp",
-        "maxzoom": 13,
+        "maxzoom": 1,
         "minzoom": 8,
         "attrs": [
           "code,legend,name,road_no,north,south,east,west,clockwise,anticlockw"
@@ -344,7 +355,7 @@
       {
         "name": "Land Use Seed",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/land_use_seed.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
         "minzoom": 9,
         "attrs": [
           "code,legend,name"
@@ -355,7 +366,7 @@
       {
         "name": "Land Use Symbol",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/land_use_symbol.shp",
-        "maxzoom": 13,
+        "maxzoom": 12,
         "minzoom": 9,
         "attrs": [
           "code,legend,name"
@@ -367,7 +378,7 @@
         "name": "Transport Text",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/transport_text.shp",
         "maxzoom": 11,
-        "minzoom": 9,
+        "minzoom": 8,
         "attrs": [
           "code,legend,name,orient,font_size,anchor_pt"
         ]

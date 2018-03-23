@@ -79,7 +79,7 @@ if($tile_format eq 'mbtiles') {
     $tippecanoe_command .= ' -f -o ' . $layers->{'config'}->{'output_file'};
 } else {
     print "WRITING TILES TO DIRECTORY " . $layers->{'config'}->{'output_directory'} ."\n";
-    $tippecanoe_command .= ' -S 10 -pC -f -e ' . $layers->{'config'}->{'output_directory'};
+    $tippecanoe_command .= ' -pC -f -e ' . $layers->{'config'}->{'output_directory'};
 }
 
 
@@ -164,7 +164,7 @@ sub make_geojson {
 
     #we pull the attributes we want in GeoJSON using an SQLite query
     $command .=' -dialect SQLite -sql "' . (
-                                           exists($layer->{'attrs'}->[0])   ?  'SELECT '. join(',', @{$layer->{'attrs'}}) . ',geometry' .
+                                           exists($layer->{'attrs'}->[0])   ?  'SELECT '. (join ',', map qq("$_"), @{$layer->{'attrs'}}) . ',geometry' .
                                                                                                $additional_attributes .
                                                                                                ' FROM ' . $layer_name.' '
                                                                             :  'SELECT geometry  FROM ' . $layer_name.' '

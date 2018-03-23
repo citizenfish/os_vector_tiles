@@ -1,97 +1,100 @@
 if (window.styles === undefined) {
     window.styles = {};
+    window.colour_map = {};
+
 }
 
+window.colour_map =   {
+    land : {
+        outline : {
+            black : "rgb(0,0,0)",
+            black_trans: "rgb(0,0,0,0.25)"
+        },
+        fill : {
+            water : "rgb(213,244,248)",
+            land  : "rgb(249,248,243)",
+            urban_region : "rgb(251,224,191)",
+            woodland_region :  "rgb(209,240,206)",
+            national_park :  "rgb(232,249,228)",
+            lakes_region : "rgb(213,244,248)",
+            foreshore_sand_region : "rgb(255,255,204)",
+            foreshore_other_region : "rgb(239,231,189)",
+            uk_tidal_water : "rgb(213,244,248)",
+            uk_foreshore: "rgb(230,235,228)",
+            uk_building: "rgb(254,222,183)",
+            uk_important_building: "rgb(254,222,183,0.25)",
+            air_transport : "rgb(255,255,127,0.25)",
+            education : "rgb(219,127,255,0.25)",
+            medical_centre: "rgb(127,255,136, 0.25)",
+            road_transport: "rgb(255,138,127,0.25)",
+            water_transport: "rgb(127,168,255,0.25)",
+            uk_tidal_boundary: "rgb(0,169,202)"
+
+        }
+    },
+    road: {
+        casing: {
+            motorway: "rgb(120,120,120)",
+            primary: "rgb(119,119,119)",
+            secondary: "rgb(119,119,119)",
+            b: "rgb(119,119,119)",
+            minor: '#505050',
+            other: '#505050',
+            uk_unclassified : "rgb(80,80,80)",
+            uk_local : "rgb(80,80,80)",
+            uk_b : "rgb(80,80,80)",
+            uk_a : "rgb(80,80,80)",
+            uk_motorway : "rgb(80,80,80)"
+        },
+        fill: {
+            motorway: "rgb(6,177,202)",
+            motorway_centre: "rgb(255,255,255)",
+            primary: "rgb(136,194,152)",
+            secondary: 'rgb(255,255,255)',
+            a: "rgb(255,179,193)",
+            b: "rgb(230,210,115)",
+            minor: 'rgb(255,255,255)',
+            other: 'rgb(255,255,255)',
+            uk_roadtunnel : "rgb(80,80,80)",
+            uk_unclassified : "rgb(255,255,255)",
+            uk_unclassified_centreline : "rgb(80,80,80)",
+            uk_local : "rgb(255,255,255)",
+            uk_local_centreline : "rgb(80,80,80)",
+            uk_b : "rgb(255,192,115)",
+            uk_b_centreline : "rgb(80,80,80)",
+            uk_a : "rgb(255,135,158)",
+            uk_primary : "rgb(255,255,255)",
+            uk_a_centreline : "rgb(255,255,255)",
+            uk_motorway: "rgb(114,198,202)"
+        },
+        label :{
+            motorway_junction : {
+                colour: "#36B1D2"
+            }
+        }
+    },
+    rail :{
+        fill : {
+            rail_line : "rgb(100,100,100)"
+        }
+    },
+    river : {
+        fill : {
+            river_line : "rgb(0,169,202)"
+        }
+    },
+    label : {
+        city: {
+            city_label: "rgb(96,96,96)",
+            city_halo: "rgb(255,255,255)"
+        }
+    }
+};
 
 window.styles.vbase = function(feature,resolution) {
 
-    var colour_map = {
-        land : {
-            outline : {
-                black : "rgb(0,0,0)",
-                black_trans: "rgb(0,0,0,0.25)"
-            },
-            fill : {
-                water : "rgb(213,244,248)",
-                land  : "rgb(249,248,243)",
-                urban_region : "rgb(251,224,191)",
-                woodland_region :  "rgb(209,240,206)",
-                national_park :  "rgb(232,249,228)",
-                lakes_region : "rgb(213,244,248)",
-                foreshore_sand_region : "rgb(255,255,204)",
-                foreshore_other_region : "rgb(239,231,189)",
-                uk_tidal_water : "rgb(213,244,248)",
-                uk_foreshore: "rgb(230,235,228)",
-                uk_building: "rgb(254,222,183)",
-                uk_important_building: "rgb(254,222,183,0.25)",
-                air_transport : "rgb(255,255,127,0.25)",
-                education : "rgb(219,127,255,0.25)",
-                medical_centre: "rgb(127,255,136, 0.25)",
-                road_transport: "rgb(255,138,127,0.25)",
-                water_transport: "rgb(127,168,255,0.25)",
-                uk_tidal_boundary: "rgb(0,169,202)"
 
-            }
-        },
-        road: {
-            casing: {
-                motorway: "rgb(120,120,120)",
-                primary: "rgb(119,119,119)",
-                secondary: "rgb(119,119,119)",
-                b: "rgb(119,119,119)",
-                minor: '#505050',
-                other: '#505050',
-                uk_unclassified : "rgb(80,80,80)",
-                uk_local : "rgb(80,80,80)",
-                uk_b : "rgb(80,80,80)",
-                uk_a : "rgb(80,80,80)",
-                uk_motorway : "rgb(80,80,80)"
-            },
-            fill: {
-                motorway: "rgb(6,177,202)",
-                motorway_centre: "rgb(255,255,255)",
-                primary: "rgb(136,194,152)",
-                secondary: 'rgb(255,255,255)',
-                a: "rgb(255,179,193)",
-                b: "rgb(230,210,115)",
-                minor: 'rgb(255,255,255)',
-                other: 'rgb(255,255,255)',
-                uk_roadtunnel : "rgb(80,80,80)",
-                uk_unclassified : "rgb(255,255,255)",
-                uk_unclassified_centreline : "rgb(80,80,80)",
-                uk_local : "rgb(255,255,255)",
-                uk_local_centreline : "rgb(80,80,80)",
-                uk_b : "rgb(255,192,115)",
-                uk_b_centreline : "rgb(80,80,80)",
-                uk_a : "rgb(255,135,158)",
-                uk_primary : "rgb(255,255,255)",
-                uk_a_centreline : "rgb(255,255,255)",
-                uk_motorway: "rgb(114,198,202)"
-            },
-            label :{
-                motorway_junction : {
-                    colour: "#36B1D2"
-                }
-            }
-        },
-        rail :{
-            fill : {
-                rail_line : "rgb(100,100,100)"
-            }
-        },
-        river : {
-            fill : {
-                river_line : "rgb(0,169,202)"
-            }
-        },
-        label : {
-            city: {
-                city_label: "rgb(96,96,96)",
-                city_halo: "rgb(255,255,255)"
-            }
-        }
-    };
-
+    var colour_map =window.colour_map;
     var widths = {
 
         secondary: 1,
@@ -112,11 +115,11 @@ window.styles.vbase = function(feature,resolution) {
         uk_b_case: [[13,2], [14,3], [15,7],[17,14]],
         uk_b_fill: [[13,1], [14,2.5], [15,6],[17,13]],
         uk_b_centreline: [[13,0.5], [14,0.5], [15,1]],
-        uk_a_case: [[12,2.5],[13,2], [14,3], [15,7],[17,14]],
-        uk_a_fill: [[12,2],[13,1], [14,2.5], [15,6],[17,13]],
+        uk_a_case: [[6,1],[12,2.5],[13,2], [14,3], [15,7],[17,14]],
+        uk_a_fill: [[6,0.5],[12,2],[13,1], [14,2.5], [15,6],[17,13]],
         uk_a_centreline: [[13,0.5], [14,0.5], [15,1]],
-        uk_motorway_case: [[13,3], [14,4], [15,8],[17,15]],
-        uk_motorway_fill: [[13,2], [14,3.5], [15,6],[17,13]],
+        uk_motorway_case: [[6,1],[13,3], [14,4], [15,8],[17,15]],
+        uk_motorway_fill: [[6,0.5],[13,2], [14,3.5], [15,6],[17,13]],
         uk_motorway_centreline: [[13,0.5], [14,0.5], [15,1]]
     };
 
@@ -185,6 +188,9 @@ window.styles.vbase = function(feature,resolution) {
         uk_road_tunnel : [5,5]
     };
 
+    var padding = {
+        uk_primary_overview : [[6,[50,50,50,50]], [10, [100,100,100,100], [13,[200,200,200,200]]]]
+    };
 
     var layer_styles = {
         world_coast                 : [{fcolor : colour_map.land.fill.land, zIndex : index_map.land}],
@@ -193,7 +199,7 @@ window.styles.vbase = function(feature,resolution) {
         uk_woodland_region          : [{fcolor : colour_map.land.fill.woodland_region, zIndex : index_map.woodland_region}],
         uk_lakes_region             : [{fcolor : colour_map.land.fill.lakes_region, zIndex : index_map.lakes_region}],
         uk_motorway_overview        : [{scolor : colour_map.road.casing.motorway, zIndex : index_map.motorway, width : widths.uk_motorway_case},{scolor : colour_map.road.fill.motorway, zIndex : index_map.motorway + 1, width : widths.uk_motorway_fill}],
-        uk_primary_overview         : [{scolor : colour_map.road.casing.primary, zIndex : index_map.primary, width : widths.uk_a_case},{scolor : colour_map.road.fill.primary, zIndex : index_map.primary + 1, width : widths.uk_a_fill}],
+
         uk_secondary_overview       : [{scolor : colour_map.road.casing.secondary, zIndex : index_map.primary, width : widths.secondary},{scolor : colour_map.road.fill.secondary, zIndex : index_map.primary + 1, width : widths.secondary -0.5}],
         uk_unclassified_overview    : [{scolor : colour_map.road.casing.secondary, zIndex : index_map.primary, width : widths.unclassified}],
         uk_railway_line             : [{scolor : colour_map.rail.fill.rail_line, zIndex : index_map.rail, width : widths.railway_line}],
@@ -205,6 +211,13 @@ window.styles.vbase = function(feature,resolution) {
         uk_important_building       : [{fcolor : colour_map.land.fill.uk_important_building, scolor: colour_map.land.outline.black_trans, width: widths.building_outline, zIndex : index_map.uk_important_building}],
         uk_surfacewater_line        : [{fcolour: colour_map.river.fill.river_line, width : widths.uk_surface_water_line, zIndex :index_map.uk_surface_water_line}],
         uk_roadtunnel               : [{fcolour: colour_map.road.fill.uk_roadtunnel, linedash: line_dashes.uk_road_tunnel, zIndex: index_map.uk_road_tunnel}],
+        uk_primary_overview         : function(properties){
+
+                return [
+                    {text : properties.roadnumber, padding: padding.uk_primary_overview ,textFill:colour_map.road.fill.primary, textColor:colour_map.road.fill.primary, scolor: colour_map.road.casing.primary, zIndex : index_map.primary, width : widths.uk_a_case},
+                    {scolor : colour_map.road.fill.primary, zIndex : index_map.primary + 1, width : widths.uk_a_fill}]
+        },
+
         uk_road                     : function(properties,resolution) {
 
             var styles = [];
@@ -275,6 +288,7 @@ window.styles.vbase = function(feature,resolution) {
                     styles.push({fcolor: colour_map.road.fill.uk_motorway_centreline, width: widths.uk_motorway_centreline, zIndex: index_map.uk_road_motorway_centre});
                 }
             }
+
             return styles;
         },
         uk_river_line : function(properties) {
@@ -284,7 +298,7 @@ window.styles.vbase = function(feature,resolution) {
             }
             return [{scolor : colour_map.river.fill.river_line, zIndex : index_map.river, width : widths.river_small}];
         },
-        uk_transport_text : function(properties,resolution) {
+        uk_transport_text_ignore : function(properties,resolution) {
 
             //Motorway label
             if(properties['CODE'] === 5031) {
@@ -292,7 +306,7 @@ window.styles.vbase = function(feature,resolution) {
             }
 
             //Primary road label
-            if([5032,5033].indexOf(properties['CODE']) !== -1 && resolution < 200) {
+            if([5032,5033].indexOf(properties['CODE']) !== -1 && resolution < 400) {
                 return [{text: properties['NAME'], labelOnly: true, textFill: colour_map.road.fill.primary, textColor: colour_map.road.fill.motorway_centre}];
             }
             return [];
@@ -301,7 +315,7 @@ window.styles.vbase = function(feature,resolution) {
 
             //City Labels
             if(properties['CODE'] === 5427) {
-                return [{text: properties['NAME'], labelOnly: true, textFill: colour_map.label.city.city_label, textColor: colour_map.label.city.city_halo}];
+                return [{text: properties['NAME'], labelOnly: true, font: '12px sans-serif', textFill: colour_map.label.city.city_label, textColor: colour_map.label.city.city_halo}];
             }
             return [];
         },
@@ -320,23 +334,28 @@ window.styles.vbase = function(feature,resolution) {
         },
         uk_tidal_boundary : function(properties) {
             return [ {fcolour : colour_map.land.fill.uk_tidal_boundary, width : properties.CLASSIFICA = 'High Water Mark' ? widths.tidal_boundary_high : widths.tidal_boundary_low, zIndex: index_map.uk_tidal_boundary}];
-        },
+        }
 
     };
 
     var style_maker = function(params) {
 
 
-        //Set width based on zoom level
-        if(Array.isArray(params.width)) {
-            var width = params.width[0][1];
-            for (var i = 0; i < params.width.length; i++) {
-                if(params.width[i][0] > map.getView().getZoom()) {
-                    break;
+        //Set item based on zoom level if it comes in as an array
+
+        for (var i in params) {
+
+            if(Array.isArray(params[i]) && i !== 'linedash') {
+                var val = params[i][0][1];
+                for(var j =0; j < params[i].length; j++) {
+                    if(params[i][j][0] > map.getView().getZoom()){
+                        break;
+                    }
+                    val = params[i][j][1];
                 }
-                    width = params.width[i][1];
+                params[i] = val;
             }
-            params.width = width;
+
         }
 
         var fill =  new ol.style.Fill({ color : params.fcolor || ''}),
@@ -344,12 +363,12 @@ window.styles.vbase = function(feature,resolution) {
 
         //TEXT LABEL
         if(params.text !== '') {
-
             var textStyle = new ol.style.Text({
                 font : params.font || '10px sans-serif',
                 fill : new ol.style.Fill({color: params.textFill || 'rgb(0,0,0)'}),
                 stroke: new ol.style.Stroke({color: params.textColor || 'rgb(0,0,0)', width: params.textWidth || 1}),
-                text: params.text
+                text: params.text,
+                padding:  params.padding || [20,20,20,20]
             });
 
             if(params.labelOnly) {
