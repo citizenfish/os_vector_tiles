@@ -166,7 +166,7 @@
         "name": "National Park",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/national_park.shp",
         "maxzoom": 12,
-        "minzoom": 7,
+        "minzoom": 6,
         "attrs": [
           "code,legend,name"
         ]
@@ -189,7 +189,7 @@
         "name": "UK Primary Overview",
         "file": "/opt/nautoguide/fast_mount/vector_tiles/openroads/data/openroads_all_roads_simplified.shp",
         "maxzoom": 10,
-        "minzoom": 8,
+        "minzoom": 7,
         "selector" : "primary_fl = 'true' AND formofway != 'Slip Road'",
         "attrs": [
           "roadnumber", "class", "formOfWay", "primary_fl"
@@ -246,7 +246,7 @@
         "name": "Woodland Region",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/woodland_region.shp",
         "maxzoom": 12,
-        "minzoom": 9,
+        "minzoom": 11,
         "attrs": [
           "code"
         ]
@@ -331,10 +331,21 @@
     ],
     "uk_settlement_seed": [
       {
-        "name": "Settlement Seed",
+        "name": "Settlement Seed City",
         "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/settlement_seed.shp",
         "maxzoom": 12,
-        "minzoom": 7,
+        "minzoom": 6,
+        "selector": "CODE = 5427",
+        "attrs": [
+          "code,legend,name,admin_name,location"
+        ]
+      },
+      {
+        "name": "Settlement Seed Not City",
+        "file": "/opt/nautoguide/gisraw/os-opendata-2016/strategi/strtgi_essh_gb/data/settlement_seed.shp",
+        "maxzoom": 12,
+        "minzoom": 8,
+        "selector": "CODE != 5427",
         "attrs": [
           "code,legend,name,admin_name,location"
         ]
