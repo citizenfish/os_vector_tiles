@@ -93,7 +93,7 @@ window.colour_map =   {
 
 window.styles.vbase = function(feature,resolution) {
 
-    console.log(feature);
+
     var colour_map =window.colour_map;
     var widths = {
 
@@ -202,14 +202,14 @@ window.styles.vbase = function(feature,resolution) {
 
         uk_secondary_overview       : [{scolor : colour_map.road.casing.secondary, zIndex : index_map.primary, width : widths.secondary},{scolor : colour_map.road.fill.secondary, zIndex : index_map.primary + 1, width : widths.secondary -0.5}],
         uk_unclassified_overview    : [{scolor : colour_map.road.casing.secondary, zIndex : index_map.primary, width : widths.unclassified}],
-        uk_railway_line             : [{scolor : colour_map.rail.fill.rail_line, zIndex : index_map.rail, width : widths.railway_line}],
-        uk_woodland                 : [{fcolor : colour_map.land.fill.woodland_region, zIndex : index_map.uk_woodland}],
+        rail             : [{scolor : colour_map.rail.fill.rail_line, zIndex : index_map.rail, width : widths.railway_line}],
+        woodland                 : [{fcolor : colour_map.land.fill.woodland_region, zIndex : index_map.uk_woodland}],
         uk_tidal_water              : [{fcolor : colour_map.land.fill.uk_tidal_water, zIndex : index_map.uk_tidal_water}],
         uk_water_area               : [{fcolor : colour_map.land.fill.uk_water_area, zIndex : index_map.uk_water_area}],
-        uk_foreshore                : [{fcolor : colour_map.land.fill.uk_foreshore, zIndex : index_map.uk_foreshore}],
-        uk_building                 : [{fcolor : colour_map.land.fill.uk_building, zIndex : index_map.uk_building, scolor: colour_map.land.outline.black, width: widths.building_outline}],
+        foreshore                : [{fcolor : colour_map.land.fill.uk_foreshore, zIndex : index_map.uk_foreshore}],
+        buildings                 : [{fcolor : colour_map.land.fill.uk_building, zIndex : index_map.uk_building, scolor: colour_map.land.outline.black, width: widths.building_outline}],
         uk_important_building       : [{fcolor : colour_map.land.fill.uk_important_building, scolor: colour_map.land.outline.black_trans, width: widths.building_outline, zIndex : index_map.uk_important_building}],
-        uk_surfacewater_line        : [{fcolour: colour_map.river.fill.river_line, width : widths.uk_surface_water_line, zIndex :index_map.uk_surface_water_line}],
+        waterlines        : [{fcolour: colour_map.river.fill.river_line, width : widths.uk_surface_water_line, zIndex :index_map.uk_surface_water_line}],
         uk_roadtunnel               : [{fcolour: colour_map.road.fill.uk_roadtunnel, linedash: line_dashes.uk_road_tunnel, zIndex: index_map.uk_road_tunnel}],
         uk_primary_overview         : function(properties){
 
@@ -218,11 +218,12 @@ window.styles.vbase = function(feature,resolution) {
                     {scolor : colour_map.road.fill.primary, zIndex : index_map.primary + 1, width : widths.uk_a_fill}]
         },
 
-        uk_road                     : function(properties,resolution) {
+        roads                     : function(properties,resolution) {
+            //console.log(properties.type);
 
             var styles = [];
             ///UNCLASSIFIED
-            if(['Guided Busway Carriageway', 'Restricted Local Access Road', 'Shared Use Carriageway'].indexOf(properties.CLASSIFICA) !== -1 ) {
+            if(['Guided Busway Carriageway', 'Restricted', 'Shared Use Carriageway'].indexOf(properties.type) !== -1 ) {
 
                     //Case
                     styles.push({fcolor: colour_map.road.casing.uk_unclassified, width: widths.uk_unclassified_case, zIndex: index_map.uk_road_unclassified_case});
@@ -234,7 +235,7 @@ window.styles.vbase = function(feature,resolution) {
                     }
             }
             ///LOCAL
-            if(['Local Access Road', 'Local Road', 'Minor Road, Collapsed Dual Carriageway', 'Minor Road'].indexOf(properties.CLASSIFICA) !== -1 ) {
+            if(['Local Access Road', 'Local', 'Minor'].indexOf(properties.type) !== -1 ) {
 
                 //Case
                 styles.push({fcolor: colour_map.road.casing.uk_local, width: widths.uk_local_case, zIndex: index_map.uk_road_local_case});
@@ -247,7 +248,7 @@ window.styles.vbase = function(feature,resolution) {
             }
 
             ///B
-            if(['B Road, Collapsed Dual Carriageway', 'B Road'].indexOf(properties.CLASSIFICA) !== -1 ) {
+            if(['B Road, Collapsed Dual Carriageway', 'B Road'].indexOf(properties.type) !== -1 ) {
 
                 //Case
                 styles.push({fcolor: colour_map.road.casing.uk_b, width: widths.uk_b_case, zIndex: index_map.uk_road_b_case});
@@ -260,7 +261,7 @@ window.styles.vbase = function(feature,resolution) {
             }
 
             //A
-            if(['A Road, Collapsed Dual Carriageway', 'A Road','Primary Road, Collapsed Dual Carriageway','Primary Road'].indexOf(properties.CLASSIFICA) !== -1 ) {
+            if(['A Road, Collapsed Dual Carriageway', 'A Road','Primary Road, Collapsed Dual Carriageway','Primary'].indexOf(properties.type) !== -1 ) {
 
                 //Case
                 styles.push({fcolor: colour_map.road.casing.uk_a, width: widths.uk_a_case, zIndex: index_map.uk_road_a_case});
@@ -271,13 +272,13 @@ window.styles.vbase = function(feature,resolution) {
                     styles.push({fcolor: colour_map.road.fill.uk_primary, width: widths.uk_a_fill, zIndex: index_map.uk_road_a_fill});
                 }
 
-                if(properties.CLASSIFICA == 'A Road, Collapsed Dual Carriageway' || properties.CLASSIFICA == 'Primary Road, Collapsed Dual Carriageway') {
+                if(properties.CLASSIFICA == 'A Road, Collapsed Dual Carriageway' || properties.type == 'Primary Road, Collapsed Dual Carriageway') {
                     styles.push({fcolor: colour_map.road.fill.uk_a_centreline, width: widths.uk_a_centreline, zIndex: index_map.uk_road_a_centre});
                 }
             }
 
             ///MOTORWAY
-            if(['Motorway, Collapsed Dual Carriageway', 'Motorway'].indexOf(properties.CLASSIFICA) !== -1 ) {
+            if(['Motorway, Collapsed Dual Carriageway', 'Motorway'].indexOf(properties.type) !== -1 ) {
 
                 //Case
                 styles.push({fcolor: colour_map.road.casing.uk_motorway, width: widths.uk_motorway_case, zIndex: index_map.uk_road_motorway_case});
@@ -311,11 +312,11 @@ window.styles.vbase = function(feature,resolution) {
             }
             return [];
         },
-        uk_settlement_seed : function(properties) {
-
+        names : function(properties) {
+           
             //City Labels
             if(properties['CODE'] === 5427) {
-                return [{text: properties['NAME'], labelOnly: true, font: '12px sans-serif', textFill: colour_map.label.city.city_label, textColor: colour_map.label.city.city_halo}];
+                return [{text: properties['name'], labelOnly: true, font: '12px sans-serif', textFill: colour_map.label.city.city_label, textColor: colour_map.label.city.city_halo}];
             }
             return [];
         },
@@ -392,6 +393,7 @@ window.styles.vbase = function(feature,resolution) {
     //Units are in pixels
     var properties = feature.getProperties();
 
+
     var style_array = [];
 
     if(layer_styles[properties.layer] !== undefined && Array.isArray(layer_styles[properties.layer])) {
@@ -399,6 +401,11 @@ window.styles.vbase = function(feature,resolution) {
             style_array.push(new style_maker(layer_styles[properties.layer][i]));
         }
     }
+
+    if(layer_styles[properties.layer] === undefined) {
+        console.log('NOT FOUND ' + properties.layer);
+    }
+
 
     if(layer_styles[properties.layer] !== undefined && typeof(layer_styles[properties.layer]) === "function") {
 
