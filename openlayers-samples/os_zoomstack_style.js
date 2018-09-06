@@ -313,7 +313,7 @@ window.styles.vbase = function(feature,resolution) {
             return [];
         },
         names : function(properties) {
-           
+
             //City Labels
             if(properties['CODE'] === 5427) {
                 return [{text: properties['name'], labelOnly: true, font: '12px sans-serif', textFill: colour_map.label.city.city_label, textColor: colour_map.label.city.city_halo}];
