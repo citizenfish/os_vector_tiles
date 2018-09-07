@@ -11,7 +11,7 @@ function interpolate(interpolate,properties) {
     if(interpolate[0] == 'interpolate' && interpolate[1][0] == 'linear' && interpolate[2][0] =='zoom') {
 
         var value = interpolate[4];
-        for(var i = 3; i < interpolate.length; i+= 4) {
+        for(var i = 3; i < interpolate.length; i+= 2) {
 
             if(zoom >= interpolate[i] && zoom <= interpolate[i + 2]) {
 
@@ -71,11 +71,16 @@ function zoom_set_opacity(colour, stops) {
         rgb = hsl2rgb(colour);
     }
 
-    var opacity = 1;
+    var opacity;
     for(var i in stops) {
         if(stops[i][0] <= map.getView().getZoom()) {
             opacity = stops[i][1];
         }
+    }
+
+    //We send a single array if no interpolation required
+    if(opacity === undefined) {
+        opacity = stops[1];
     }
 
     return 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + opacity + ')';
@@ -181,7 +186,7 @@ function styleMaker(style,properties,zIndex) {
                                                                       typeof (style.paint['fill-opacity']) == 'object' ? [0,interpolate( style.paint['fill-opacity'])] :
                                                                       [0,style.paint['fill-opacity']]);
         } else {
-            fcolor = zoom_set_opacity(style.paint['fill-color'], [0,0]);
+            fcolor = zoom_set_opacity(style.paint['fill-color'], [0,1]);
         }
 
         ol_style_params['fill'] = new ol.style.Fill({color: fcolor});
@@ -196,20 +201,29 @@ function styleMaker(style,properties,zIndex) {
 
     if(style.type === 'line') {
 
-        var scolor;
+        var scolor,
+            stroke_params ={},
+            fill_params = {};
 
         //line join
-        ol_style_params['lineJoin'] = style.layout['line-join'] !== undefined ? style.layout['line-join'] : 'round';
-        ol_style_params['lineCap'] = style.layout['line-cap'] !== undefined ? style.layout['line-cap'] : 'round';
+        stroke_params['lineJoin'] = style.layout['line-join'] !== undefined ? style.layout['line-join'] : 'round';
+        stroke_params['lineCap'] = style.layout['line-cap'] !== undefined ? style.layout['line-cap'] : 'round';
 
         //line width
-        ol_style_params['width'] = typeof (style.paint['line-width']) == 'object' ? interpolate(style.paint['line-width'],properties) : style.paint['line-width'];
+        stroke_params['width'] = typeof (style.paint['line-width']) == 'object' ? interpolate(style.paint['line-width'],properties) : style.paint['line-width'];
 
         //Colour
         scolor = zoom_set_opacity(style.paint['line-color'], [0, style.paint['line-opacity'] != undefined ?  style.paint['line-opacity'] : 1 ]);
+        stroke_params['color'] = scolor;
+
 
         //Stoke and fill
-        ol_style_params['stroke'] = new ol.style.Stroke({ color : scolor});
+        if(style.paint['line-dasharray'] !== undefined) {
+            stroke_params['lineDash'] = style.paint['line-dasharray'];
+        }
+
+        //Make our style from stroke and fill
+        ol_style_params['stroke'] = new ol.style.Stroke(stroke_params);
         ol_style_params['fill']   = new ol.style.Fill({ color : scolor});
         return  new ol.style.Style(ol_style_params);
 
@@ -297,12 +311,17 @@ window.styles.vbase = function(feature,resolution) {
                 style_params = {};
 
             // Check we are rendering at this zoom level //'sea','national-parks','foreshore','buildings','sites','greenspaces','woodland','waterlines','surfacewater',
-            if((style.minzoom === undefined || style.minzoom <= zoom) && (style.maxzoom === undefined || style.maxzoom >= zoom) && ['sea','national-parks','foreshore','buildings','sites','greenspaces','woodland','waterlines','surfacewater','roads','rail'].includes(layer)) {
+            if( (style.minzoom === undefined || style.minzoom <= zoom) &&
+                (style.maxzoom === undefined || style.maxzoom >= zoom) &&
+                //['buildings','sea'].includes(layer)
+                1==1
+                //layer == 'etl'
+                //(style.id == 'etl' || style.id == 'FAIroads 0 Local Road')
+            ) {
 
 
                 var olstyle = styleMaker(style,properties,f);
                 if(olstyle !== undefined) {
-
                     style_array.push(olstyle);
                 }
             }

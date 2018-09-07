@@ -2,6 +2,8 @@
 
 These notes describe the work done to create native openlayers styles and maps for the Ordnance Survey Zoomstack vector tiles stack. 
 
+Oh and YES I know about this https://github.com/boundlessgeo/ol-mapbox-style countless people have pointed me at it ...but just try with the Zoomstack styles and you will wonder why the interpolate functions are not working.....The boundless implementation does not support stops, interpolation
+
 ## OS Documentation Links
 
 Overview page https://www.ordnancesurvey.co.uk/business-and-government/products/os-open-zoomstack.html
