@@ -2,6 +2,10 @@
 
 These notes describe the work done to create native openlayers styles and maps for the Ordnance Survey Zoomstack vector tiles stack. 
 
+## OS Documentation Links
+
+Overview page https://www.ordnancesurvey.co.uk/business-and-government/products/os-open-zoomstack.html
+
 # Style File
 
 Openlayers handles feature styling in an entirely different manner to mapbox-gl. Styles are rendered via a style function which offers a huge degree of flexibility but equally causes complexity and complications. mapbox-gl uses a json style file to control feature rendering and the capabilities of this style fle are fixed.

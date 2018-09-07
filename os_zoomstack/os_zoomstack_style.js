@@ -54,7 +54,7 @@ function interpolate(interpolate,properties) {
     return value.toFixed(2);
 }
 /**
- * This function takes a HEX colour and an array of zooms/opacity values and returns the most appropriate opacity
+ * This function takes a HEX/HSL colour and an array of zooms/opacity values and returns the most appropriate opacity to the current zoom level
  * @param colour
  * @param stops
  * @returns {string}
@@ -242,8 +242,6 @@ function styleMaker(style,properties,zIndex) {
             text_style['placement'] = style.layout['symbol-placement'];
         }
 
-        if(text_style['text'] == 'A19')
-            console.log(text_style);
 
         return new ol.style.Style({text: new ol.style.Text(text_style)});
 
@@ -308,6 +306,8 @@ window.styles.vbase = function(feature,resolution) {
                     style_array.push(olstyle);
                 }
             }
+
+
         }
     }
 
