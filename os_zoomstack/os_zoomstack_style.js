@@ -59,7 +59,7 @@ function interpolate(interpolate,properties) {
  * @param stops
  * @returns {string}
  */
-function zoom_set_opacity(colour, stops) {
+function colour_setter(colour, stops) {
 
     var rgb;
 
@@ -182,11 +182,11 @@ function styleMaker(style,properties,zIndex) {
 
         //Fill opacity is either a fixed value or a range of zoom stops in an array [5,0.9,10,0.3,...]
         if(style.paint['fill-opacity'] !== undefined) {
-                fcolor = zoom_set_opacity(style.paint['fill-color'],  style.paint['fill-opacity'].stops !== undefined  ? style.paint['fill-opacity'].stops :
+                fcolor = colour_setter(style.paint['fill-color'],  style.paint['fill-opacity'].stops !== undefined  ? style.paint['fill-opacity'].stops :
                                                                       typeof (style.paint['fill-opacity']) == 'object' ? [0,interpolate( style.paint['fill-opacity'])] :
                                                                       [0,style.paint['fill-opacity']]);
         } else {
-            fcolor = zoom_set_opacity(style.paint['fill-color'], [0,1]);
+            fcolor = colour_setter(style.paint['fill-color'], [0,1]);
         }
 
         ol_style_params['fill'] = new ol.style.Fill({color: fcolor});
@@ -213,7 +213,7 @@ function styleMaker(style,properties,zIndex) {
         stroke_params['width'] = typeof (style.paint['line-width']) == 'object' ? interpolate(style.paint['line-width'],properties) : style.paint['line-width'];
 
         //Colour
-        scolor = zoom_set_opacity(style.paint['line-color'], [0, style.paint['line-opacity'] != undefined ?  style.paint['line-opacity'] : 1 ]);
+        scolor = colour_setter(style.paint['line-color'], [0, style.paint['line-opacity'] != undefined ?  style.paint['line-opacity'] : 1 ]);
         stroke_params['color'] = scolor;
 
 
@@ -267,6 +267,13 @@ function styleMaker(style,properties,zIndex) {
 function filter(filter,properties) {
 
     var type = filter[0];
+
+    if(type === '==') {
+        if(properties[filter[1]] == filter[2]) {
+            return true;
+        }
+    }
+
     if(type === 'in' || type === '!in') {
         var attribute = filter[1];
 
@@ -291,6 +298,8 @@ function filter(filter,properties) {
         return true;
     }
 
+
+
     return false;
 }
 
@@ -312,11 +321,7 @@ window.styles.vbase = function(feature,resolution) {
 
             // Check we are rendering at this zoom level //'sea','national-parks','foreshore','buildings','sites','greenspaces','woodland','waterlines','surfacewater',
             if( (style.minzoom === undefined || style.minzoom <= zoom) &&
-                (style.maxzoom === undefined || style.maxzoom >= zoom) &&
-                //['buildings','sea'].includes(layer)
-                1==1
-                //layer == 'etl'
-                //(style.id == 'etl' || style.id == 'FAIroads 0 Local Road')
+                (style.maxzoom === undefined || style.maxzoom >= zoom) 
             ) {
 
 
