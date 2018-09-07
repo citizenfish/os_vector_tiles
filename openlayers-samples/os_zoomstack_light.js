@@ -1,4 +1,4 @@
-window.style.mb_stylem = {
+window.styles.mb_style = {
   "version": 8,
   "name": "OS Light",
   "metadata": {

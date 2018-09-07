@@ -4,6 +4,55 @@ if (window.styles === undefined) {
 
 }
 
+function interpolate(interpolate,properties) {
+
+    var zoom  = map.getView().getZoom();
+    //Linear interpolation on zoom
+    if(interpolate[0] == 'interpolate' && interpolate[1][0] == 'linear' && interpolate[2][0] =='zoom') {
+
+        var value = interpolate[4];
+        for(var i = 3; i < interpolate.length; i+= 4) {
+
+            if(zoom >= interpolate[i] && zoom <= interpolate[i + 2]) {
+
+                /** A horrible bit of code to cope with embedded match elements in interpolation arrays **/
+                if(typeof(interpolate[i+1]) == 'object') {
+                  /* TODO I currently hardcode to match/get/type*/
+                    var ip_value = '';
+                  var match =  interpolate[i+1];
+                  for(var j = 2; j < match.length; j+=2){
+
+                      if(properties[match[1][1]] == match[j]) {
+                          ip_value = match[j+1];
+                      }
+                  }
+
+                  //pick last value if no match made
+                  if(ip_value == '') {
+                      ip_value = match[j - 1];
+                  }
+
+                  //Now replace horrible array with the value
+                  interpolate[i+1] = ip_value;
+
+                }
+
+                var m = (interpolate[i+3] - interpolate[i+1])/ (interpolate[i + 2] - interpolate[i]);
+                var c = (interpolate[i+1]) - ( m * interpolate[i]);
+                value = (m * zoom) + c;  //y = mX + C
+                break;
+            }
+        }
+
+        //if zoom was greater than range supplied
+        if(value < interpolate[i - 1]) {
+            value = interpolate[i - 1];
+        }
+
+    }
+
+    return value.toFixed(2);
+}
 /**
  * This function takes a HEX colour and an array of zooms/opacity values and returns the most appropriate opacity
  * @param colour
@@ -12,13 +61,21 @@ if (window.styles === undefined) {
  */
 function zoom_set_opacity(colour, stops) {
 
-    var rgb = hexToRgb(colour);
+    var rgb;
+
+    if(/#/.test(colour)) {
+        rgb = hexToRgb(colour);
+    }
+
+    if(/hsl/.test(colour)) {
+        rgb = hsl2rgb(colour);
+    }
+
     var opacity = 1;
-    for(var j =0; j < stops[i].length; j++) {
-        if(stops[i][j][0] <= map.getView().getZoom()){
-            break;
+    for(var i in stops) {
+        if(stops[i][0] <= map.getView().getZoom()) {
+            opacity = stops[i][1];
         }
-        opacity = stops[i][j][1];
     }
 
     return 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + opacity + ')';
@@ -37,9 +94,193 @@ function hexToRgb(hex) {
             b: parseInt(result[3], 16)
         } : null;
 }
-/*
- Main function called for each feature in the vector layer
+
+function hsl2rgb (hsl) {
+
+    var r, g, b, m, c, x,h,s,l;
+
+    var matches = hsl.match(/hsl\(([0-9]+)[ ,]+([0-9]+)[ ,%]+([0-9]+)/);
+    h = matches[1];
+    s = matches[2];
+    l = matches[3];
+
+    if (!isFinite(h)) h = 0;
+    if (!isFinite(s)) s = 0;
+    if (!isFinite(l)) l = 0;
+
+    h /= 60;
+    if (h < 0) h = 6 - (-h % 6);
+    h %= 6;
+
+    s = Math.max(0, Math.min(1, s / 100));
+    l = Math.max(0, Math.min(1, l / 100));
+
+    c = (1 - Math.abs((2 * l) - 1)) * s;
+    x = c * (1 - Math.abs((h % 2) - 1));
+
+    if (h < 1) {
+        r = c;
+        g = x;
+        b = 0
+    } else if (h < 2) {
+        r = x;
+        g = c;
+        b = 0
+    } else if (h < 3) {
+        r = 0;
+        g = c;
+        b = x
+    } else if (h < 4) {
+        r = 0;
+        g = x;
+        b = c
+    } else if (h < 5) {
+        r = x;
+        g = 0;
+        b = c
+    } else {
+        r = c;
+        g = 0;
+        b = x
+    }
+
+    m = l - c / 2;
+    r = Math.round((r + m) * 255);
+    g = Math.round((g + m) * 255);
+    b = Math.round((b + m) * 255);
+
+    return { r: r, g: g, b: b };
+
+}
+
+/**
+ * Make an Openlayers style from parameters
+ * @param params
+ * @returns {ol.style.Style}
  */
+
+function styleMaker(style,properties,zIndex) {
+
+
+    var ol_style_params = {zIndex : zIndex};
+
+    //Apply any filters
+    if(style.filter !== undefined && filter(style.filter, properties) == false) {
+        return undefined;
+    }
+
+    if(style.type === 'fill') {
+
+
+        //Allow for opacity stops
+        var fcolor = 'rgb(255,255,255)';
+
+        //Fill opacity is either a fixed value or a range of zoom stops in an array [5,0.9,10,0.3,...]
+        if(style.paint['fill-opacity'] !== undefined) {
+                fcolor = zoom_set_opacity(style.paint['fill-color'],  style.paint['fill-opacity'].stops !== undefined  ? style.paint['fill-opacity'].stops :
+                                                                      typeof (style.paint['fill-opacity']) == 'object' ? [0,interpolate( style.paint['fill-opacity'])] :
+                                                                      [0,style.paint['fill-opacity']]);
+        } else {
+            fcolor = zoom_set_opacity(style.paint['fill-color'], [0,0]);
+        }
+
+        ol_style_params['fill'] = new ol.style.Fill({color: fcolor});
+
+
+        if(style.paint['fill-outline-color'] !== undefined) {
+            ol_style_params['stroke'] = new ol.style.Stroke({ color : style.paint['fill-outline-color']});
+        }
+
+        return  new ol.style.Style(ol_style_params);
+    }
+
+    if(style.type === 'line') {
+
+        var scolor;
+
+        //line join
+        ol_style_params['lineJoin'] = style.layout['line-join'] !== undefined ? style.layout['line-join'] : 'round';
+        ol_style_params['lineCap'] = style.layout['line-cap'] !== undefined ? style.layout['line-cap'] : 'round';
+
+        //line width
+        ol_style_params['width'] = typeof (style.paint['line-width']) == 'object' ? interpolate(style.paint['line-width'],properties) : style.paint['line-width'];
+
+        //Colour
+        scolor = zoom_set_opacity(style.paint['line-color'], [0, style.paint['line-opacity'] != undefined ?  style.paint['line-opacity'] : 1 ]);
+
+        //Stoke and fill
+        ol_style_params['stroke'] = new ol.style.Stroke({ color : scolor});
+        ol_style_params['fill']   = new ol.style.Fill({ color : scolor});
+        return  new ol.style.Style(ol_style_params);
+
+    }
+
+    if(style.type === 'symbol') {
+
+
+        var text_style = {padding: [100,100,100,100]},
+        text_size;
+
+        if(/{.*}/.test(style.layout['text-field'])) {
+            text_style['text'] =  properties[style.layout['text-field'].match(/{(.*)}/)[1]];
+        }
+
+        text_size = typeof (style.layout['text-size']) == 'object' ? interpolate(style.layout['text-size']) : style.layout['text-size'];
+
+        /** TO DO come back and test the fonts in order at moment I just chose safest **/
+        text_style['font'] = text_size + 'px, "' + (typeof (style.layout['text-font']) == 'object' ? style.layout['text-font'][0] : style.layout['text-font'] ) +'"';
+        text_style['fill'] = new ol.style.Fill({color: style.paint['text-color'] != undefined ? style.paint['text-color'] : '#000000'});
+
+
+        if(style.paint['text-halo-color'] != undefined) {
+
+            text_style['stroke'] = new ol.style.Stroke({color: style.paint['text-halo-color'], width : style.paint['text-halo-width']});
+
+        }
+
+        if(style.layout['symbol-placement'] != undefined) {
+            text_style['placement'] = style.layout['symbol-placement'];
+        }
+
+        if(text_style['text'] == 'A19')
+            console.log(text_style);
+
+        return new ol.style.Style({text: new ol.style.Text(text_style)});
+
+    }
+    return undefined;
+
+};
+
+function filter(filter,properties) {
+
+    var type = filter[0];
+    if(type === 'in' || type === '!in') {
+        var attribute = filter[1];
+
+        for(var i = 2; i < filter.length; i++) {
+
+            if((type === 'in' && properties[attribute] === filter[i]) || (type === '!in' && properties[attribute] === filter[i])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    if(type === 'all') {
+        for(var i = 1; i < filter.length; i++) {
+            var sub_filter = filter[i];
+            if(sub_filter[0] == '==' && properties[sub_filter[1]] != sub_filter[2]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    return false;
+}
 
 window.styles.vbase = function(feature,resolution) {
 
@@ -47,22 +288,27 @@ window.styles.vbase = function(feature,resolution) {
     var zoom = map.getView().getZoom(),
         style_array = [],
         properties = feature.getProperties();
-    var    layer = properties.layer
+    var    layer = properties.layer;
 
-    if(layer == 'sea') {
-        style_array.push(new ol.style.Style({fill : '#c5cdd0', zIndex : 0}));
-    }
 
-    if(layer == 'foreshore' && zoom >= 5){
-        style_array.push(new ol.style.Style({fill : '#e9e7e2', zIndex : 1}));
-    }
+    //Look for our layer in the Mapbox style file
+    for(var f = 0; f < styles.mb_style.layers.length; f++) {
+        if(styles.mb_style.layers[f]['source-layer'] === layer) {
 
-    if(layer == 'national-parks' && zoom > =5 && zoom <= 12){
-        style_array.push(new ol.style.Style({fill : zoom_set_opacity('#d8ddd4', [[5,0.7],[9,0.5],[12,0.1]]), zIndex : 1}));
-    }
+            var style = styles.mb_style.layers[f],
+                style_params = {};
 
-    if(layer == 'buildings' && zoom >= 5 && zoom <= 11) {
+            // Check we are rendering at this zoom level //'sea','national-parks','foreshore','buildings','sites','greenspaces','woodland','waterlines','surfacewater',
+            if((style.minzoom === undefined || style.minzoom <= zoom) && (style.maxzoom === undefined || style.maxzoom >= zoom) && ['sea','national-parks','foreshore','buildings','sites','greenspaces','woodland','waterlines','surfacewater','roads','rail'].includes(layer)) {
 
+
+                var olstyle = styleMaker(style,properties,f);
+                if(olstyle !== undefined) {
+
+                    style_array.push(olstyle);
+                }
+            }
+        }
     }
 
     return style_array;

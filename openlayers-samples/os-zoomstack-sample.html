@@ -1,11 +1,16 @@
 <html>
 <head>
     <title>Openlayers Vector Tiles - OS Style</title>
-    <script src="https://lib.nautoguide.com/moho/master/js/libs/openlayers/ol-debug.js"></script>
+    <!-- <script src="https://lib.nautoguide.com/moho/master/js/libs/openlayers/ol-debug.js"></script> -->
+
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/css/ol.css">
+
     <script src="os_zoomstack_style.js"></script>
+    <script src="os_zoomstack_light.js"></script>
     <style>
         body { margin:0; padding:0; }
-        #map { height: 100%; width :100%; background-color: rgb(213,244,248);}
+        #map { height: 100%; width :100%; background-color: #f1efec}
         #code{  position:absolute; top:10%; left:50%; width:45%;}
     </style>
     <link rel="stylesheet" href="../css/styles.css">
@@ -19,15 +24,14 @@
 <script>
 
     //Openlayers will overzoom beyond the maxZoom figure set here
-    var tilegrid = ol.tilegrid.createXYZ({tileSize: 512, maxZoom: 18});
+    var tilegrid = ol.tilegrid.createXYZ({tileSize: 512, maxZoom: 15});
 
     var source = new ol.source.VectorTile({
         format: new ol.format.MVT(),
         tileGrid: tilegrid,
         tilePixelRatio: 8,
-        //url: 'https://images.tilecache.net/maptiles/vtdev/strategi_zip/{z}/{x}/{y}.pbf',
-        url: 'http://localhost:8080/data/OS-Open-Zoomstack/{z}/{x}/{y}.pbf',
-        "background-color":  "rgb(158,189,255)"
+        //url: 'https://images.tilecache.net/maptiles/vtdev/zoomstack/{z}/{x}/{y}.pbf',
+        url: 'http://localhost:8080/data/OS-Open-Zoomstack/{z}/{x}/{y}.pbf'
     });
 
 
@@ -43,7 +47,7 @@
         target: 'map',
         view: new ol.View({
             center: [-150000,7345629],
-            zoom: 15
+            zoom: 11
         })
     });
 </script>
