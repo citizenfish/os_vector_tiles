@@ -1,7 +1,7 @@
 if (window.styles === undefined) {
     window.styles = {};
     window.colour_map = {};
-
+    window.labelcachearray = ['','','','','','','','','','',''];
 }
 
 function interpolate(interpolate,properties) {
@@ -235,8 +235,17 @@ function styleMaker(style,properties,zIndex) {
         var text_style = {padding: [100,100,100,100]},
         text_size;
 
+
         if(/{.*}/.test(style.layout['text-field'])) {
             text_style['text'] =  properties[style.layout['text-field'].match(/{(.*)}/)[1]];
+           if(window.labelcachearray.includes(text_style['text'])){
+               return undefined;
+           }
+
+            window.labelcachearray.unshift(text_style['text']);
+            window.labelcachearray.pop();
+
+
         }
 
         text_size = typeof (style.layout['text-size']) == 'object' ? interpolate(style.layout['text-size']) : style.layout['text-size'];
@@ -311,7 +320,6 @@ window.styles.vbase = function(feature,resolution) {
         properties = feature.getProperties();
     var    layer = properties.layer;
 
-
     //Look for our layer in the Mapbox style file
     for(var f = 0; f < styles.mb_style.layers.length; f++) {
         if(styles.mb_style.layers[f]['source-layer'] === layer) {
@@ -320,10 +328,7 @@ window.styles.vbase = function(feature,resolution) {
                 style_params = {};
 
             // Check we are rendering at this zoom level //'sea','national-parks','foreshore','buildings','sites','greenspaces','woodland','waterlines','surfacewater',
-            if( (style.minzoom === undefined || style.minzoom <= zoom) &&
-                (style.maxzoom === undefined || style.maxzoom >= zoom)
-            ) {
-
+            if( (style.minzoom === undefined || style.minzoom <= zoom) && (style.maxzoom === undefined || style.maxzoom >= zoom) ) {
 
                 var olstyle = styleMaker(style,properties,f);
                 if(olstyle !== undefined) {
