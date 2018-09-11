@@ -93,7 +93,7 @@ window.colour_map =   {
 
 window.styles.vbase = function(feature,resolution) {
 
-
+    console.log(feature);
     var colour_map =window.colour_map;
     var widths = {
 
