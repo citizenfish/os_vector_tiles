@@ -242,7 +242,7 @@ function styleMaker(style,properties,zIndex) {
 
             //prevent label repetition over last ten labels horrible hack to positioning issue with road labels
             if(window.labelcachearray.includes(text_style['text'])){
-               return undefined;
+               //return undefined;
            }
 
             window.labelcachearray.unshift(text_style['text']);
@@ -332,8 +332,9 @@ window.styles.vbase = function(feature,resolution) {
                 style_params = {};
 
             // Check we are rendering at this zoom level //'sea','national-parks','foreshore','buildings','sites','greenspaces','woodland','waterlines','surfacewater',
-            if( (style.minzoom === undefined || style.minzoom <= zoom) && (style.maxzoom === undefined || style.maxzoom >= zoom) ) {
+            if( (style.minzoom === undefined || style.minzoom <= zoom) && (style.maxzoom === undefined || style.maxzoom >= zoom) && layer == 'buildings') {
 
+                console.log(properties);
                 var olstyle = styleMaker(style,properties,f);
                 if(olstyle !== undefined) {
                     style_array.push(olstyle);

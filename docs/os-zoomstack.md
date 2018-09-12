@@ -22,7 +22,7 @@ The converter is not a full implementation of the mapbox-gl style capabilities. 
 
 Vector tiles can be served in a serverless manner. This is done by unloading the tiles from the mbtiles database format and uploading them to an Amazon s3 directory structure. Process is as follows:-
 
-Install mb-utils: https://github.com/mapbox/mbutil
+Install tippeacanoe: https://github.com/mapbox/tippecanoe
 
 Install s3-parallel-put: https://github.com/mishudark/s3-parallel-put
 
@@ -30,9 +30,7 @@ Break tiles into file system locally
 
 ```
 
-NOTE: important to add zlib hack before doing this https://github.com/mapbox/mbutil/pull/96/files
-
-mb-util --image_format=pbf --do_compression OS-Open-Zoomstack.mbtiles os-zoomstack
+tile-join --output-to-directory=os-zoomstack OS-Open-Zoomstack.mbtiles --no-tile-size-limit
 ```
 
 Export Amazon credentials locally:-
@@ -47,7 +45,12 @@ Create a batch file **load_levels.sh** to load tiles:-
 ```text
 for ZOOM_LEVEL in "$@"
 do
-        /usr/bin/s3-parallel-put --put=add --bucket=<bucket name> --prefix=<s3 prefix>/$ZOOM_LEVEL --insecure --host=s3.amazonaws.com --bucket_region=<bucket region> $ZOOM_LEVEL/
+        /usr/bin/s3-parallel-put --header=Content-Type:application/x-protobuf \
+        --header=Content-Encoding:gzip \
+        --put=stupid --bucket=images.tilecache.net \
+        --prefix=maptiles/vtdev/zoomstack/$ZOOM_LEVEL \
+        --insecure --host=s3.amazonaws.com \
+        --bucket_region=eu-west-1 $ZOOM_LEVEL/
 done
 ```
 
