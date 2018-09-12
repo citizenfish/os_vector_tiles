@@ -29,7 +29,10 @@ Install s3-parallel-put: https://github.com/mishudark/s3-parallel-put
 Break tiles into file system locally
 
 ```
-mb-utils os-zoomstack.mbtiles os-zoomstack
+
+NOTE: important to add zlib hack before doing this https://github.com/mapbox/mbutil/pull/96/files
+
+mb-util --image_format=pbf --do_compression OS-Open-Zoomstack.mbtiles os-zoomstack
 ```
 
 Export Amazon credentials locally:-
@@ -57,4 +60,15 @@ load_levels.sh 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
 
 ```
 
+## Using xyz urls in mapbox styles
 
+https://www.loxodrome.io/post/zoomstack/
+
+```
+	"composite": {
+		"tiles": [
+			"http://127.0.0.1:8080/tiles/pbftiles/{z}/{x}/{y}.pbf"
+		],
+		"type": "vector"
+	}
+```

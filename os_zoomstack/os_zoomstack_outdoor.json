@@ -1,4 +1,4 @@
-window.styles.mb_style={
+{
     "version": 8,
     "name": "OS Outdoor",
     "metadata": {
@@ -43,7 +43,7 @@ window.styles.mb_style={
 },
     "sources": {
     "composite": {
-        "url": "mapbox://ADD SOURCE URL HERE",
+        "url": "mapbox://nautoguideltd.4b3xfajj",
             "type": "vector"
     }
 },

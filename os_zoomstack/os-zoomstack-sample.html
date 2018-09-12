@@ -30,8 +30,9 @@
         format: new ol.format.MVT(),
         tileGrid: tilegrid,
         tilePixelRatio: 8,
-        //url: 'https://images.tilecache.net/maptiles/vtdev/zoomstack/{z}/{x}/{y}.pbf',
-        url: 'http://localhost:8080/data/OS-Open-Zoomstack/{z}/{x}/{y}.pbf'
+        //url: 'http://yaxi/oszs/{z}/{x}/{y}.pbf'
+        url: 'https://images.tilecache.net/maptiles/vtdev/zoomstack/{z}/{x}/{y}.pbf',
+        //url: 'http://localhost:8080/data/OS-Open-Zoomstack/{z}/{x}/{y}.pbf'
     });
 
 
@@ -47,7 +48,7 @@
         target: 'map',
         view: new ol.View({
             center: [-285120.90392017487, 7288560.261131323],
-            zoom:13
+            zoom:5
         })
     });
 </script>

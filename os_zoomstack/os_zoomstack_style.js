@@ -1,6 +1,7 @@
 if (window.styles === undefined) {
     window.styles = {};
     window.colour_map = {};
+    /** This is horrible but used as a moving array of names to prevent label repetition **/
     window.labelcachearray = ['','','','','','','','','','',''];
 }
 
@@ -238,12 +239,15 @@ function styleMaker(style,properties,zIndex) {
 
         if(/{.*}/.test(style.layout['text-field'])) {
             text_style['text'] =  properties[style.layout['text-field'].match(/{(.*)}/)[1]];
-           if(window.labelcachearray.includes(text_style['text'])){
+
+            //prevent label repetition over last ten labels horrible hack to positioning issue with road labels
+            if(window.labelcachearray.includes(text_style['text'])){
                return undefined;
            }
 
             window.labelcachearray.unshift(text_style['text']);
             window.labelcachearray.pop();
+            //end of horrible hack feel free to rewrite
 
 
         }
