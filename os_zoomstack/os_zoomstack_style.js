@@ -331,7 +331,7 @@ window.styles.vbase = function(feature,resolution) {
             var style = styles.mb_style.layers[f],
                 style_params = {};
 
-            // Check we are rendering at this zoom level //'sea','national-parks','foreshore','buildings','sites','greenspaces','woodland','waterlines','surfacewater',
+            // Check we are rendering at this zoom level 
             if( (style.minzoom === undefined || style.minzoom <= zoom) && (style.maxzoom === undefined || style.maxzoom >= zoom)) {
 
                 console.log(properties);
