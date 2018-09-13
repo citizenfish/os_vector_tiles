@@ -332,7 +332,7 @@ window.styles.vbase = function(feature,resolution) {
                 style_params = {};
 
             // Check we are rendering at this zoom level //'sea','national-parks','foreshore','buildings','sites','greenspaces','woodland','waterlines','surfacewater',
-            if( (style.minzoom === undefined || style.minzoom <= zoom) && (style.maxzoom === undefined || style.maxzoom >= zoom) && layer == 'buildings') {
+            if( (style.minzoom === undefined || style.minzoom <= zoom) && (style.maxzoom === undefined || style.maxzoom >= zoom)) {
 
                 console.log(properties);
                 var olstyle = styleMaker(style,properties,f);
